@@ -9,7 +9,7 @@ Los Santos Transit - Buslinien Anzeiger für deinen Stream
 ![Screenshot](LST-Screenshot.png)
 
 ## Benutzung
-- Starten
+- Starten NACH GTA (wichtig!)
 - Hotkey-Standardkonfiguration (NICHT NUMPAD!):
 
 | Hotkey   | Funktion        |
