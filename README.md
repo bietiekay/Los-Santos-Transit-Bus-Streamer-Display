@@ -10,7 +10,7 @@ Los Santos Transit - Buslinien Anzeiger für deinen Stream
 
 ## Benutzung
 - Starten
-- Hotkey-Standardkonfiguration:
+- Hotkey-Standardkonfiguration (NICHT NUMPAD!):
 
 | Hotkey   | Funktion        |
 |----------|-----------------|
