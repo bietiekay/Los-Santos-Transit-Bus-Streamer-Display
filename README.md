@@ -6,7 +6,7 @@ Los Santos Transit - Buslinien Anzeiger für deinen Stream
 - Konfiguration Schriftzeichen anpassen in LS-Busline-Font.xml
 - Konfiguration Linien und Zeiten anpassen in LST-Busline-Konfiguration.json
 
-![LST-Screenshot.png]
+![Screenshot](LST-Screenshot.png)
 
 ## Benutzung
 - Starten
