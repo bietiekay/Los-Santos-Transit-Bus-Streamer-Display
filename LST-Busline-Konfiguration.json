@@ -1,0 +1,673 @@
+{
+  "settings": {
+    "hotkeys": {
+      "nextstop": 57,
+      "previousstop": 56,
+      "resetline": 55,
+      "switchline": 54,
+      "switchmode": 53
+    },
+    "style": {
+      "led_on_color": -256,
+      "led_off_color": -12566464,
+      "led_size_coefficient": 0.80
+    }
+  },
+  "modes": [
+    {
+      "name": "Linienbetrieb",
+      "lines": [
+        {
+          "name": "City 1",
+          "stops": [
+            {
+              "name": "ZOB",
+              "leavetimes_hourly": [
+                0,
+                30
+              ]
+            },
+            {
+              "name": "Stadtpark",
+              "leavetimes_hourly": [
+                1,
+                31
+              ]
+            },
+            {
+              "name": "La Mesa",
+              "leavetimes_hourly": [
+                2,
+                32
+              ]
+            },
+            {
+              "name": "El Burro Heights",
+              "leavetimes_hourly": [
+                3,
+                33
+              ]
+            },
+            {
+              "name": "Cypress Flats",
+              "leavetimes_hourly": [
+                4,
+                34
+              ]
+            },
+            {
+              "name": "Rancho",
+              "leavetimes_hourly": [
+                4,
+                34
+              ]
+            },
+            {
+              "name": "Chamberlain Hills",
+              "leavetimes_hourly": [
+                5,
+                35
+              ]
+            },
+            {
+              "name": "LS Intl. Airport",
+              "leavetimes_hourly": [
+                8,
+                38
+              ]
+            },
+            {
+              "name": "ACLS",
+              "leavetimes_hourly": [
+                9,
+                39
+              ]
+            },
+            {
+              "name": "La Puerta",
+              "leavetimes_hourly": [
+                10,
+                40
+              ]
+            },
+            {
+              "name": "Little Seoul",
+              "leavetimes_hourly": [
+                11,
+                41
+              ]
+            },
+            {
+              "name": "Vespucci Beach",
+              "leavetimes_hourly": [
+                12,
+                42
+              ]
+            },
+            {
+              "name": "Vespucci Kanäle",
+              "leavetimes_hourly": [
+                13,
+                43
+              ]
+            },
+            {
+              "name": "Rockford Hills",
+              "leavetimes_hourly": [
+                14,
+                44
+              ]
+            },
+            {
+              "name": "Dept. of Labor",
+              "leavetimes_hourly": [
+                15,
+                45
+              ]
+            },
+            {
+              "name": "Del Perro",
+              "leavetimes_hourly": [
+                16,
+                46
+              ]
+            },
+            {
+              "name": "Morningwood",
+              "leavetimes_hourly": [
+                17,
+                47
+              ]
+            },
+            {
+              "name": "Richman",
+              "leavetimes_hourly": [
+                17,
+                47
+              ]
+            },
+            {
+              "name": "Vinewood Hills",
+              "leavetimes_hourly": [
+                18,
+                48
+              ]
+            },
+            {
+              "name": "Vinewood West",
+              "leavetimes_hourly": [
+                19,
+                49
+              ]
+            },
+            {
+              "name": "Alta",
+              "leavetimes_hourly": [
+                20,
+                50
+              ]
+            },
+            {
+              "name": "Vinewood Ost",
+              "leavetimes_hourly": [
+                21,
+                51
+              ]
+            },
+            {
+              "name": "Mirrorpark",
+              "leavetimes_hourly": [
+                22,
+                52
+              ]
+            },
+            {
+              "name": "P.H. Medical Center",
+              "leavetimes_hourly": [
+                23,
+                53
+              ]
+            }
+          ]
+        },
+        {
+          "name": "City 2",
+          "stops": [
+            {
+              "name": "ZOB",
+              "leavetimes_hourly": [
+                0,
+                30
+              ]
+            },
+            {
+              "name": "Stadtpark",
+              "leavetimes_hourly": [
+                1,
+                31
+              ]
+            },
+            {
+              "name": "P.H. Medical Center",
+              "leavetimes_hourly": [
+                1,
+                31
+              ]
+            },
+            {
+              "name": "Mirrorpark",
+              "leavetimes_hourly": [
+                3,
+                33
+              ]
+            },
+            {
+              "name": "Vinewood Ost",
+              "leavetimes_hourly": [
+                3,
+                33
+              ]
+            },
+            {
+              "name": "Alta",
+              "leavetimes_hourly": [
+                4,
+                34
+              ]
+            },
+            {
+              "name": "Vinewood West",
+              "leavetimes_hourly": [
+                5,
+                35
+              ]
+            },
+            {
+              "name": "Vinewood Hills",
+              "leavetimes_hourly": [
+                6,
+                36
+              ]
+            },
+            {
+              "name": "Richman",
+              "leavetimes_hourly": [
+                7,
+                37
+              ]
+            },
+            {
+              "name": "Morningwood",
+              "leavetimes_hourly": [
+                7,
+                37
+              ]
+            },
+            {
+              "name": "Del Perro",
+              "leavetimes_hourly": [
+                8,
+                38
+              ]
+            },
+            {
+              "name": "Dept. of Labor",
+              "leavetimes_hourly": [
+                9,
+                39
+              ]
+            },
+            {
+              "name": "Rockford Hills",
+              "leavetimes_hourly": [
+                10,
+                40
+              ]
+            },
+            {
+              "name": "Vespucci Kanäle",
+              "leavetimes_hourly": [
+                11,
+                41
+              ]
+            },
+            {
+              "name": "Vespucci Beach",
+              "leavetimes_hourly": [
+                11,
+                41
+              ]
+            },
+            {
+              "name": "Little Seoul",
+              "leavetimes_hourly": [
+                13,
+                43
+              ]
+            },
+            {
+              "name": "La Puerta",
+              "leavetimes_hourly": [
+                14,
+                44
+              ]
+            },
+            {
+              "name": "LS Intl. Airport",
+              "leavetimes_hourly": [
+                17,
+                47
+              ]
+            },
+            {
+              "name": "ACLS",
+              "leavetimes_hourly": [
+                18,
+                48
+              ]
+            },
+            {
+              "name": "Chamberlain Hills",
+              "leavetimes_hourly": [
+                20,
+                50
+              ]
+            },
+            {
+              "name": "Rancho",
+              "leavetimes_hourly": [
+                20,
+                50
+              ]
+            },
+            {
+              "name": "Cypress Flats",
+              "leavetimes_hourly": [
+                21,
+                51
+              ]
+            },
+            {
+              "name": "El Burro Heights",
+              "leavetimes_hourly": [
+                22,
+                52
+              ]
+            },
+            {
+              "name": "La Mesa",
+              "leavetimes_hourly": [
+                23,
+                53
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Nord 1",
+          "stops": [
+            {
+              "name": "ZOB",
+              "leavetimes_hourly": [
+                0,
+                30
+              ]
+            },
+            {
+              "name": "Stadtpark",
+              "leavetimes_hourly": [
+                1,
+                31
+              ]
+            },
+            {
+              "name": "Alta",
+              "leavetimes_hourly": [
+                2,
+                32
+              ]
+            },
+            {
+              "name": "Harmony West",
+              "leavetimes_hourly": [
+                5,
+                35
+              ]
+            },
+            {
+              "name": "Harmony Ost",
+              "leavetimes_hourly": [
+                6,
+                36
+              ]
+            },
+            {
+              "name": "Yellow Jack Inn",
+              "leavetimes_hourly": [
+                7,
+                37
+              ]
+            },
+            {
+              "name": "Sandy Shores Airfield",
+              "leavetimes_hourly": [
+                7,
+                37
+              ]
+            },
+            {
+              "name": "Sandy Shores",
+              "leavetimes_hourly": [
+                9,
+                39
+              ]
+            },
+            {
+              "name": "Grapeseed",
+              "leavetimes_hourly": [
+                11,
+                41
+              ]
+            },
+            {
+              "name": "Paleto Bay Nord",
+              "leavetimes_hourly": [
+                15,
+                45
+              ]
+            },
+            {
+              "name": "Paleto Bay Süd",
+              "leavetimes_hourly": [
+                15,
+                45
+              ]
+            },
+            {
+              "name": "Chumash",
+              "leavetimes_hourly": [
+                20,
+                50
+              ]
+            },
+            {
+              "name": "Vespucci Kanäle",
+              "leavetimes_hourly": [
+                23,
+                53
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Nord 2",
+          "stops": [
+            {
+              "name": "ZOB",
+              "leavetimes_hourly": [
+                0,
+                30
+              ]
+            },
+            {
+              "name": "Stadtpark",
+              "leavetimes_hourly": [
+                1,
+                31
+              ]
+            },
+            {
+              "name": "Vespucci Kanäle",
+              "leavetimes_hourly": [
+                2,
+                32
+              ]
+            },
+            {
+              "name": "Chumash",
+              "leavetimes_hourly": [
+                5,
+                35
+              ]
+            },
+            {
+              "name": "Paleto Bay Süd",
+              "leavetimes_hourly": [
+                10,
+                40
+              ]
+            },
+            {
+              "name": "Paleto Bay Nord",
+              "leavetimes_hourly": [
+                10,
+                40
+              ]
+            },
+            {
+              "name": "Grapeseed",
+              "leavetimes_hourly": [
+                14,
+                44
+              ]
+            },
+            {
+              "name": "Sandy Shores",
+              "leavetimes_hourly": [
+                16,
+                46
+              ]
+            },
+            {
+              "name": "Sandy Shores Airfield",
+              "leavetimes_hourly": [
+                17,
+                47
+              ]
+            },
+            {
+              "name": "Yellow Jack Inn",
+              "leavetimes_hourly": [
+                17,
+                47
+              ]
+            },
+            {
+              "name": "Harmony Ost",
+              "leavetimes_hourly": [
+                18,
+                48
+              ]
+            },
+            {
+              "name": "Harmony West",
+              "leavetimes_hourly": [
+                19,
+                49
+              ]
+            },
+            {
+              "name": "Alta",
+              "leavetimes_hourly": [
+                24,
+                54
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sonderhalt",
+      "lines": [
+        {
+          "name": "LST",
+          "stops": [
+            {
+              "name": "SONDERHALT",
+              "leavetimes_hourly": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Außer Dienst",
+      "lines": [
+        {
+          "name": "LST",
+          "stops": [
+            {
+              "name": "AUßER DIENST",
+              "leavetimes_hourly": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Ausbildung",
+      "lines": [
+        {
+          "name": "LST",
+          "stops": [
+            {
+              "name": "AUSBILDUNG",
+              "leavetimes_hourly": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Leitstelle",
+      "lines": [
+        {
+          "name": "LST",
+          "stops": [
+            {
+              "name": "LEITSTELLE",
+              "leavetimes_hourly": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sonderfahrt",
+      "lines": [
+        {
+          "name": "LST",
+          "stops": [
+            {
+              "name": "SONDERFAHRT",
+              "leavetimes_hourly": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Betriebsstörung",
+      "lines": [
+        {
+          "name": "LST",
+          "stops": [
+            {
+              "name": "BETRIEBSSTöRUNG",
+              "leavetimes_hourly": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Test",
+      "lines": [
+        {
+          "name": "###############",
+          "stops": [
+            {
+              "name": "###############",
+              "leavetimes_hourly": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
