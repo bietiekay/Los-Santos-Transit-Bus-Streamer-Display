@@ -362,9 +362,9 @@ namespace LSTBusline
             }
 
             if (even_or_uneven)
-                return "¥" + DateTime.Now.ToString("H:mm");
+                return "¥" + DateTime.Now.ToString("HH:mm");
             else
-                return "¥" + DateTime.Now.ToString("H¦mm");
+                return "¥" + DateTime.Now.ToString("HH¦mm");
         }
 
         public DateTime GetNearestTimeInTheFutureForMinute(int MinuteInput)
