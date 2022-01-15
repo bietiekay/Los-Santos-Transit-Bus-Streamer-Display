@@ -19,3 +19,5 @@ Los Santos Transit - Buslinien Anzeiger für deinen Stream
 | Ziffer 7 | Reset           |
 | Ziffer 6 | Linie wechseln  |
 | Ziffer 5 | Modus wechseln  |
+
+- Keycodes kann man hier nachschlagen: [Windows Keycodes](https://boostrobotics.eu/windows-key-codes/)
