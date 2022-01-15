@@ -70,6 +70,9 @@ namespace LSTBusline
 
             #region read configuration
             Konfiguration = JsonConvert.DeserializeObject<SettingsRoot>(File.ReadAllText("LST-Busline-Konfiguration.json")) ?? new SettingsRoot();
+
+            // write it
+            File.WriteAllText("LST-Busline-Konfiguration.json",JsonConvert.SerializeObject(Konfiguration,Formatting.Indented));
             #endregion
 
             var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
