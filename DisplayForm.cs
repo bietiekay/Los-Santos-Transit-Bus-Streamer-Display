@@ -341,6 +341,9 @@ namespace LSTBusline
                 ledMatrixControl.SetItemText(idText_Line2, GenerateLine2());
                 // Update Nächster Halt
                 ledMatrixControl.SetItemText(idNextStopTime, GenerateNextStopTime());
+                
+                // stop updating
+                invalidated = false;
             }
 
             //Debug.WriteLine("Mode: " + currentMode + " Line: " + currentLine + " Stop:" + currentStop);
@@ -363,22 +366,38 @@ namespace LSTBusline
             else
                 return "¥" + DateTime.Now.ToString("H¦mm");
         }
+
+        public DateTime GetNearestTimeInTheFutureForMinute(int MinuteInput)
+        {
+
+            DateTime output = new DateTime(DateTime.Now.Year, DateTime.Now.Month,DateTime.Now.Day, DateTime.Now.Hour, MinuteInput, DateTime.Now.Second);
+
+            if (DateTime.Now.Minute > MinuteInput)
+                output = output.AddHours(1);
+
+            return output;
+        }
+
         public String GenerateNextStopTime()
         {
-            int nearestStopTime = Konfiguration.modes[currentMode].lines[currentLine].stops[currentStop].leavetimes_hourly?[0] ?? 0;
+            TimeSpan TimeDistance = TimeSpan.MaxValue;
+            DateTime Abfahrtzeit = DateTime.Now;
 
-            // alle Haltezeiten des nächsten Stops durchstöbern und die die am nächsten dran ist (in der Zukunft) raussuchen
-            foreach(int plannedStopTime in Konfiguration.modes[currentMode].lines[currentLine].stops[currentStop].leavetimes_hourly)
+            foreach(int Abfahrtszeit in Konfiguration.modes[currentMode].lines[currentLine].stops[currentStop].leavetimes_hourly)
             {
-                // plannedStopTime repräsentiert Minuten in der Stunde. Hier finden wir raus wie weit das von gerade weg ist...
-                // wenn die Distanz kleiner ist als vom ersten Element zu gerade, dann übernehmen wir das Element...
-                if (TimeDistance(DateTime.Now.Minute,plannedStopTime) < TimeDistance(DateTime.Now.Minute, nearestStopTime))
+                DateTime nearestTimeForAbfahrzeit = GetNearestTimeInTheFutureForMinute(Abfahrtszeit);
+                // qualifiziert weil in der Zukunft?
+                if (TimeDistance == TimeSpan.MaxValue)
+                        TimeDistance = nearestTimeForAbfahrzeit-DateTime.Now;
+
+                if (TimeDistance > nearestTimeForAbfahrzeit-DateTime.Now)
                 {
-                    nearestStopTime = plannedStopTime;
+                    TimeDistance = nearestTimeForAbfahrzeit - DateTime.Now;
+                    Abfahrtzeit = nearestTimeForAbfahrzeit;
                 }
             }
 
-            return "¦¦¦ :" + nearestStopTime.ToString("D2");
+            return "¦¦¦ :" + Abfahrtzeit.Minute.ToString("D2");
         }
         public String GenerateLogo()
         {
@@ -414,24 +433,6 @@ namespace LSTBusline
             }
 
             return PadCenter(nextStopName, MaxLineCharacters);
-        }
-        #endregion
-
-        #region Zeit Helper
-        public int TimeDistance(int Minutes, int Minutes2)
-        {
-            int tMinute1 = Minutes;
-            int tMinute2 = Minutes2;
-
-            // auf Stunde normalisieren
-            if (Minutes >= 30) tMinute1 -= 30;
-            if (Minutes2 >= 30) tMinute2 -= 30;
-
-
-            if (tMinute1 < tMinute2)
-                return tMinute2 - tMinute1;
-            else 
-                return tMinute1 - tMinute2; 
         }
         #endregion
 

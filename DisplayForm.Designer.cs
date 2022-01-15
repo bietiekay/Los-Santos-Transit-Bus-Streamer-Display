@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DisplayForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.versionlabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button_previousstop = new System.Windows.Forms.Button();
             this.button_nextstop = new System.Windows.Forms.Button();
@@ -48,7 +49,6 @@
             this.pbtDisplayLedOff = new System.Windows.Forms.Button();
             this.pbtDisplayLedOn = new System.Windows.Forms.Button();
             this.ledMatrixControl = new LedMatrixControlNamespace.LedMatrixControl();
-            this.versionlabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -69,6 +69,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1258, 170);
             this.panel1.TabIndex = 5;
+            // 
+            // versionlabel
+            // 
+            this.versionlabel.AutoSize = true;
+            this.versionlabel.Location = new System.Drawing.Point(1201, 121);
+            this.versionlabel.Name = "versionlabel";
+            this.versionlabel.Size = new System.Drawing.Size(45, 15);
+            this.versionlabel.TabIndex = 8;
+            this.versionlabel.Text = "version";
             // 
             // groupBox1
             // 
@@ -137,11 +146,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1012, 146);
+            this.label1.Location = new System.Drawing.Point(963, 146);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(234, 15);
+            this.label1.Size = new System.Drawing.Size(292, 15);
             this.label1.TabIndex = 6;
-            this.label1.Text = "(C) Daniel Kirstenpfad / schrankmonster.de";
+            this.label1.Text = "(C) Daniel Kirstenpfad / bietiekay / schrankmonster.de";
             // 
             // pbtHide
             // 
@@ -288,15 +297,6 @@
             this.ledMatrixControl.SizeCoeff = 0.67D;
             this.ledMatrixControl.TabIndex = 2;
             this.ledMatrixControl.Text = "ledMatrixControl";
-            // 
-            // versionlabel
-            // 
-            this.versionlabel.AutoSize = true;
-            this.versionlabel.Location = new System.Drawing.Point(1201, 121);
-            this.versionlabel.Name = "versionlabel";
-            this.versionlabel.Size = new System.Drawing.Size(45, 15);
-            this.versionlabel.TabIndex = 8;
-            this.versionlabel.Text = "version";
             // 
             // DisplayForm
             // 
