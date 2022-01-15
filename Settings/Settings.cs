@@ -20,8 +20,11 @@ namespace LST_Busline.Settings
     public class Style
     {
         public int led_on_color { get; set; }
-        public int led_off_color { get; set; }        
-        public float led_size_coefficient { get; set; }
+        public int led_off_color { get; set; }
+        public double led_size_coefficient { get; set; }
+        public int lines { get; set; }
+        public int rows { get; set; }
+        public int ledtype { get; set; }
     }
 
     public class Settings

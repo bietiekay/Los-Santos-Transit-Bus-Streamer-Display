@@ -10,7 +10,10 @@
     "style": {
       "led_on_color": -256,
       "led_off_color": -12566464,
-      "led_size_coefficient": 0.80
+      "led_size_coefficient": 0.80,
+      "lines": 17,
+      "rows": 200,
+      "ledtype": 0
     }
   },
   "modes": [
@@ -558,23 +561,7 @@
       ]
     },
     {
-      "name": "Sonderhalt",
-      "lines": [
-        {
-          "name": "LST",
-          "stops": [
-            {
-              "name": "SONDERHALT",
-              "leavetimes_hourly": [
-                0
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Außer Dienst",
+      "name": "Sonderanzeige",
       "lines": [
         {
           "name": "LST",
@@ -584,83 +571,39 @@
               "leavetimes_hourly": [
                 0
               ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Ausbildung",
-      "lines": [
-        {
-          "name": "LST",
-          "stops": [
+            },
             {
-              "name": "AUSBILDUNG",
+              "name": "OFFICE",
               "leavetimes_hourly": [
                 0
               ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Leitstelle",
-      "lines": [
-        {
-          "name": "LST",
-          "stops": [
-            {
-              "name": "LEITSTELLE",
-              "leavetimes_hourly": [
-                0
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Sonderfahrt",
-      "lines": [
-        {
-          "name": "LST",
-          "stops": [
-            {
-              "name": "SONDERFAHRT",
-              "leavetimes_hourly": [
-                0
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Betriebsstörung",
-      "lines": [
-        {
-          "name": "LST",
-          "stops": [
+            },
             {
               "name": "BETRIEBSSTöRUNG",
               "leavetimes_hourly": [
                 0
               ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Test",
-      "lines": [
-        {
-          "name": "###############",
-          "stops": [
+            },
             {
-              "name": "###############",
+              "name": "AUSBILDUNG",
+              "leavetimes_hourly": [
+                0
+              ]
+            },
+            {
+              "name": "LEITSTELLE",
+              "leavetimes_hourly": [
+                0
+              ]
+            },
+            {
+              "name": "SONDERHALT",
+              "leavetimes_hourly": [
+                0
+              ]
+            },
+            {
+              "name": "SONDERFAHRT",
               "leavetimes_hourly": [
                 0
               ]

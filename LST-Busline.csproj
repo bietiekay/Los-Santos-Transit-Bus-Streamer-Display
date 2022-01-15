@@ -14,7 +14,10 @@
     <Authors>Daniel Kirstenpfad</Authors>
     <Copyright>(C) Daniel Kirstenpfad 2022</Copyright>
     <PackageIcon>LST-Logo.png</PackageIcon>
-    <DebugType>none</DebugType>
+    <DebugType>embedded</DebugType>
+    <AssemblyVersion>1.2</AssemblyVersion>
+    <FileVersion>1.2</FileVersion>
+    <Version>1.2</Version>
   </PropertyGroup>
 
   <ItemGroup>

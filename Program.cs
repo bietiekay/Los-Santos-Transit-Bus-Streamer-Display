@@ -25,12 +25,9 @@ namespace LSTBusline
                 return;
             }
 
-            var keyboardHookManager = new KeyboardHookManager();
-            keyboardHookManager.Start();
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DisplayForm(keyboardHookManager));
+            Application.Run(new DisplayForm());
         }
     }
 }
