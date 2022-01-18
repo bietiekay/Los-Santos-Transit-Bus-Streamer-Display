@@ -9,7 +9,7 @@ Los Santos Transit - Buslinien Anzeiger für deinen Stream
 ![Screenshot](LST-Screenshot.png)
 
 ## Benutzung
-- Starten
+- Starten - darauf achten dass, wenn GTA/AltV als Administrator laufen auch die LED Anzeige als Administrator laufen sollte (sonst gehen die Hotkeys nicht)
 - Hotkey-Standardkonfiguration (NICHT NUMPAD!):
 
 | Hotkey   | Funktion        |
