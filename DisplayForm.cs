@@ -24,6 +24,7 @@ using NonInvasiveKeyboardHookLibrary;
 
 namespace LSTBusline
 {
+
     /// <summary>
     /// Definition of the demonstration interface
     /// </summary>
@@ -69,10 +70,8 @@ namespace LSTBusline
             InitializeComponent();
 
             #region read configuration
-            Konfiguration = JsonConvert.DeserializeObject<SettingsRoot>(File.ReadAllText("LST-Busline-Konfiguration.json")) ?? new SettingsRoot();
-
-            // write it
-            File.WriteAllText("LST-Busline-Konfiguration.json",JsonConvert.SerializeObject(Konfiguration,Formatting.Indented));
+            Konfiguration = ReadConfiguration();
+            WriteConfiguration(Konfiguration);
             #endregion
 
             var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
@@ -127,6 +126,20 @@ namespace LSTBusline
             invalidated = true;
             InitTimer();
         }
+
+        #region Konfiguration
+        public SettingsRoot ReadConfiguration()
+        {
+            return JsonConvert.DeserializeObject<SettingsRoot>(File.ReadAllText("LST-Busline-Konfiguration.json")) ?? new SettingsRoot();
+        }
+
+        public void WriteConfiguration(SettingsRoot Konfiguration)
+        {
+            // write it
+            File.WriteAllText("LST-Busline-Konfiguration.json", JsonConvert.SerializeObject(Konfiguration, Formatting.Indented));
+
+        }
+        #endregion
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
@@ -470,6 +483,9 @@ namespace LSTBusline
             {
                 ledMatrixControl.SetLedStyle(LedSyle.Square);
             }
+            Konfiguration.settings.style.ledtype = cbxDisplayLedStyle.SelectedIndex;              
+            WriteConfiguration(Konfiguration);
+
         }
 
         private void pbtDisplayLedOn_Click(object sender, EventArgs e)
@@ -481,6 +497,9 @@ namespace LSTBusline
                 pbtDisplayLedOn.BackColor = cdLedOnColorDlg.Color;
                 ledMatrixControl.LedOnColor = cdLedOnColorDlg.Color;
             }
+            Konfiguration.settings.style.led_on_color = cdLedOnColorDlg.Color.ToArgb();
+            WriteConfiguration(Konfiguration);
+
         }
 
         private void pbtDisplayLedOff_Click(object sender, EventArgs e)
@@ -492,6 +511,8 @@ namespace LSTBusline
                 pbtDisplayLedOff.BackColor = cdLedOffColorDlg.Color;
                 ledMatrixControl.LedOffColor = cdLedOffColorDlg.Color;
             }
+            Konfiguration.settings.style.led_off_color = cdLedOffColorDlg.Color.ToArgb();
+            WriteConfiguration(Konfiguration);
 
         }
 
@@ -519,6 +540,10 @@ namespace LSTBusline
         private void nudLedSize_ValueChanged(object sender, EventArgs e)
         {
             ledMatrixControl.SizeCoeff = (double)nudLedSize.Value;
+
+            Konfiguration.settings.style.led_size_coefficient = (double)nudLedSize.Value;
+            WriteConfiguration(Konfiguration);
+
         }
 
         #endregion

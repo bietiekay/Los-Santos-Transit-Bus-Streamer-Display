@@ -564,7 +564,7 @@
       "name": "Sonderanzeige",
       "lines": [
         {
-          "name": "LST",
+          "name": "Los Santos Transit",
           "stops": [
             {
               "name": "AUßER DIENST",
@@ -574,6 +574,12 @@
             },
             {
               "name": "OFFICE",
+              "leavetimes_hourly": [
+                0
+              ]
+            },
+            {
+              "name": "DIENSTBESPRECHUNG",
               "leavetimes_hourly": [
                 0
               ]
