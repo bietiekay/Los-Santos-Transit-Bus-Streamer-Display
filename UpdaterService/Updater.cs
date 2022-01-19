@@ -105,6 +105,7 @@ namespace UpdaterService.Diagnostics.Update
             {
                 Log.Write("Update Fehler: {0}", http.Response.StatusDescription);
                 this._remoteConfig = null;
+                StopMonitoring();
                 return;
             }
 
@@ -117,6 +118,7 @@ namespace UpdaterService.Diagnostics.Update
             if (this._localConfig.SecurityToken != this._remoteConfig.SecurityToken)
             {
                 Log.Write("Update Fehler: Sicherheitstoken.#100");
+                StopMonitoring();
                 return;
             }
             //Log.Write("Remote config is valid.");
@@ -137,7 +139,7 @@ namespace UpdaterService.Diagnostics.Update
                 StopMonitoring();
                 return;
             }
-            Log.Write("Update auf {1}.#27", this._remoteConfig.AppVersion);
+            Log.Write("Update auf {0}.#27", this._remoteConfig.AppVersion);
             //Log.Write("#30");
             _updating = true;
             Update();
@@ -162,6 +164,7 @@ namespace UpdaterService.Diagnostics.Update
                 catch (IOException)
                 {
                     Log.Write("Fehler: Kann Verzeichniss nicht aktualisieren: '{0}'.#100", WorkPath);
+                    StopMonitoring();
                     return;
                 }
             }
@@ -178,6 +181,7 @@ namespace UpdaterService.Diagnostics.Update
                 if (file == null)
                 {
                     Log.Write("Fehler: Download fehlgeschlagen.#100");
+                    StopMonitoring();
                     return;
                 }
                 var info = new FileInfo(Path.Combine(WorkPath, update));
@@ -197,7 +201,8 @@ namespace UpdaterService.Diagnostics.Update
                     }
                     catch (Exception ex)
                     {
-                        Log.Write("Fehler: Entpacken gescheitert - {0}", ex.Message);                        
+                        Log.Write("Fehler: Entpacken gescheitert - {0}", ex.Message);
+                        StopMonitoring();
                         return;
                     }
                 }

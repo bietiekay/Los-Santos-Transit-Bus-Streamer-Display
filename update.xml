@@ -2,8 +2,8 @@
 <Manifest version="6">
   <CheckInterval>10</CheckInterval>
   <AppVersion>1.6</AppVersion>
-  <RemoteConfigUri>https://raw.githubusercontent.com/bietiekay/Los-Santos-Transit-Bus-Streamer-Display/master/update.xml</RemoteConfigUri>
+  <RemoteConfigUri>https://www.schrankmonster.de/lst-busline-updater/update.xml</RemoteConfigUri>
   <SecurityToken>B68EF4A7-E787-4CC4-B020-878BA649B4CD</SecurityToken>
-  <BaseUri>https://github.com/bietiekay/Los-Santos-Transit-Bus-Streamer-Display/releases/download/1.5/</BaseUri>
-  <Payload>LST-Busline-v1.5-update.zip</Payload>
+  <BaseUri>https://www.schrankmonster.de/lst-busline-updater/</BaseUri>
+  <Payload>LST-Busline-v1.6-update.zip</Payload>
 </Manifest>
