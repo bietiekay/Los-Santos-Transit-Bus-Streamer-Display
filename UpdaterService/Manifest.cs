@@ -82,7 +82,7 @@ namespace UpdaterService.Diagnostics.Update
 
                 // Set properties.
                 Version = int.Parse(xml.Root.Attribute("version").Value);
-                AppVersion = xml.Root.Element("version").Value;
+                AppVersion = xml.Root.Element("AppVersion").Value;
                 CheckInterval = int.Parse(xml.Root.Element("CheckInterval").Value);
                 SecurityToken = xml.Root.Element("SecurityToken").Value;
                 RemoteConfigUri = xml.Root.Element("RemoteConfigUri").Value;
