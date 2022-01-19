@@ -15,13 +15,21 @@
     <Copyright>(C) Daniel Kirstenpfad / bietiekay 2022</Copyright>
     <PackageIcon>LST-Logo.png</PackageIcon>
     <DebugType>embedded</DebugType>
-    <AssemblyVersion>1.5</AssemblyVersion>
-    <FileVersion>1.5</FileVersion>
-    <Version>1.5</Version>
+    <AssemblyVersion>1.6</AssemblyVersion>
+    <FileVersion>1.6</FileVersion>
+    <Version>1.6</Version>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="update.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Assets\LST-Logo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="update.xml" />
   </ItemGroup>
 
   <ItemGroup>

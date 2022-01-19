@@ -30,14 +30,17 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DisplayForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.UpdateStatusTextbox = new System.Windows.Forms.TextBox();
             this.versionlabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.Lizenzen = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button_previousstop = new System.Windows.Forms.Button();
             this.button_nextstop = new System.Windows.Forms.Button();
             this.button_reset = new System.Windows.Forms.Button();
             this.button_switchline = new System.Windows.Forms.Button();
             this.button_switchmode = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.pbtHide = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label18 = new System.Windows.Forms.Label();
@@ -50,6 +53,7 @@
             this.pbtDisplayLedOn = new System.Windows.Forms.Button();
             this.ledMatrixControl = new LedMatrixControlNamespace.LedMatrixControl();
             this.panel1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLedSize)).BeginInit();
@@ -57,9 +61,8 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.versionlabel);
+            this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.pbtHide);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -70,14 +73,59 @@
             this.panel1.Size = new System.Drawing.Size(1258, 170);
             this.panel1.TabIndex = 5;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.UpdateStatusTextbox);
+            this.groupBox3.Controls.Add(this.versionlabel);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.Lizenzen);
+            this.groupBox3.Location = new System.Drawing.Point(823, 13);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(432, 150);
+            this.groupBox3.TabIndex = 11;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Informationen";
+            // 
+            // UpdateStatusTextbox
+            // 
+            this.UpdateStatusTextbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.UpdateStatusTextbox.Location = new System.Drawing.Point(6, 121);
+            this.UpdateStatusTextbox.Name = "UpdateStatusTextbox";
+            this.UpdateStatusTextbox.Size = new System.Drawing.Size(420, 23);
+            this.UpdateStatusTextbox.TabIndex = 10;
+            // 
             // versionlabel
             // 
+            this.versionlabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.versionlabel.AutoSize = true;
-            this.versionlabel.Location = new System.Drawing.Point(1201, 121);
+            this.versionlabel.Location = new System.Drawing.Point(300, 81);
             this.versionlabel.Name = "versionlabel";
             this.versionlabel.Size = new System.Drawing.Size(45, 15);
             this.versionlabel.TabIndex = 8;
             this.versionlabel.Text = "version";
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(134, 103);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(292, 15);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "(C) Daniel Kirstenpfad / bietiekay / schrankmonster.de";
+            // 
+            // Lizenzen
+            // 
+            this.Lizenzen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Lizenzen.Location = new System.Drawing.Point(351, 77);
+            this.Lizenzen.Name = "Lizenzen";
+            this.Lizenzen.Size = new System.Drawing.Size(75, 23);
+            this.Lizenzen.TabIndex = 9;
+            this.Lizenzen.Text = "Lizenzen";
+            this.Lizenzen.UseVisualStyleBackColor = true;
+            this.Lizenzen.Click += new System.EventHandler(this.Lizenzen_Click);
             // 
             // groupBox1
             // 
@@ -91,7 +139,7 @@
             this.groupBox1.Size = new System.Drawing.Size(310, 150);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Buttons";
+            this.groupBox1.Text = "Steuerung";
             // 
             // button_previousstop
             // 
@@ -142,15 +190,6 @@
             this.button_switchmode.Text = "Modus wechseln";
             this.button_switchmode.UseVisualStyleBackColor = true;
             this.button_switchmode.Click += new System.EventHandler(this.button_switchmode_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(963, 146);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(292, 15);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "(C) Daniel Kirstenpfad / bietiekay / schrankmonster.de";
             // 
             // pbtHide
             // 
@@ -313,7 +352,8 @@
             this.Name = "DisplayForm";
             this.Text = "Los Santos Transit BUS Linienanzeiger";
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -343,6 +383,9 @@
         private Button button_switchline;
         private Button button_switchmode;
         private Label versionlabel;
+        private Button Lizenzen;
+        private GroupBox groupBox3;
+        private TextBox UpdateStatusTextbox;
     }
 }
 

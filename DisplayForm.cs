@@ -21,17 +21,59 @@ using LedMatrixControlNamespace;
 using LST_Busline.Settings;
 using Newtonsoft.Json;
 using NonInvasiveKeyboardHookLibrary;
+using UpdaterService.Diagnostics.Update;
+
 
 namespace LSTBusline
 {
-
     /// <summary>
     /// Definition of the demonstration interface
     /// </summary>
     public partial class DisplayForm : Form
     {
-        //[DllImport("user32.dll")]
-        //public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
+        #region Thread-Safe Status + Progressbar
+        private delegate void SafeSetTextBoxText(string text);
+        private delegate void SafeSetProgressBarValue(int value);
+
+        private void SplitAndUpdateStatusTextAndProgressbar(string InputText)
+        {
+            String[] SplitUp = InputText.Split('#');
+
+            if (SplitUp.Length > 1)
+            {
+                WriteTextSafe(SplitUp[0]);
+                SetProgressBarValueSafe(Convert.ToInt16(SplitUp[1]));
+            }
+
+
+        }
+        private void WriteTextSafe(string text)
+        {
+            if (UpdateStatusTextbox.InvokeRequired)
+            {
+                var d = new SafeSetTextBoxText(WriteTextSafe);
+                UpdateStatusTextbox.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                UpdateStatusTextbox.Text = text;
+            }
+        }
+        private void SetProgressBarValueSafe(int value)
+        {
+            /*if (SplashProgressBar.InvokeRequired)
+            {
+                var d = new SafeSetProgressBarValue(SetProgressBarValueSafe);
+                SplashProgressBar.Invoke(d, new object[] { value });
+            }
+            else
+            {
+                SplashProgressBar.Value = value;
+            }*/
+        }
+        #endregion
+
+
 
         int idText_Line1;     
         int idText_Line2;
@@ -68,6 +110,10 @@ namespace LSTBusline
         public DisplayForm()
         {
             InitializeComponent();
+            SplitAndUpdateStatusTextAndProgressbar("Starte...#0");
+
+            Log.Event += (sender, e) => SplitAndUpdateStatusTextAndProgressbar(e.Message);
+
 
             #region read configuration
             Konfiguration = ReadConfiguration();
@@ -90,7 +136,6 @@ namespace LSTBusline
                 ledMatrixControl.SetLedStyle(LedSyle.Square);
                 cbxDisplayLedStyle.SelectedIndex = 1;
             }
-                
 
             // Get the color from the control
             pbtDisplayLedOn.BackColor = ledMatrixControl.LedOnColor;
@@ -125,6 +170,9 @@ namespace LSTBusline
             RegisterHotkeys(_kManager);
             invalidated = true;
             InitTimer();
+
+            var updater = new UpdaterService.Diagnostics.Update.Updater(StartUpAndUpdate.ReadResourceHelper.ReadResource("update.xml"));
+            updater.StartMonitoring();
         }
 
         #region Konfiguration
@@ -141,10 +189,24 @@ namespace LSTBusline
         }
         #endregion
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            // Fensterposition wiederherstellen
+            Location = new Point(Konfiguration.settings.style.windowposition_x, Konfiguration.settings.style.windowposition_y);
+            Size = new Size(Konfiguration.settings.style.windowwidth, Konfiguration.settings.style.windowheight);
+
+        }
+
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
-            // Code            
+            // Fensterposition speichern...
+            Konfiguration.settings.style.windowposition_x = Location.X;
+            Konfiguration.settings.style.windowposition_y = Location.Y;
+            Konfiguration.settings.style.windowheight = Size.Height;
+            Konfiguration.settings.style.windowwidth = Size.Width;
+            WriteConfiguration(Konfiguration);
         }
 
         public void RegisterHotkeys(KeyboardHookManager kManager)
@@ -520,6 +582,7 @@ namespace LSTBusline
         {
             if (m_bIsHide == false)
             {
+                groupBox3.Visible = false;
                 groupBox2.Visible = false;
                 groupBox1.Visible = false;
                 pbtHide.Text = "Ausklappen";
@@ -528,6 +591,7 @@ namespace LSTBusline
             }
             else
             {
+                groupBox3.Visible = true;
                 groupBox2.Visible = true;
                 groupBox1.Visible = true;
                 pbtHide.Text = "Einklappen";
@@ -571,6 +635,12 @@ namespace LSTBusline
         private void button_reset_Click(object sender, EventArgs e)
         {
             HandleHotKey_Reset();
+        }
+
+        private void Lizenzen_Click(object sender, EventArgs e)
+        {
+            var myForm = new ReleaseNotesCopyrightsAndLicenses();
+            myForm.Show();
         }
     }
 }

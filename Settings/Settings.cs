@@ -25,6 +25,10 @@ namespace LST_Busline.Settings
         public int lines { get; set; } = 17;
         public int rows { get; set; } = 200;
         public int ledtype { get; set; } = 0;
+        public int windowposition_x { get; set; } = -1;
+        public int windowposition_y { get; set; } = -1;
+        public int windowheight { get; set; } = 545;
+        public int windowwidth { get; set; } = 1274;
     }
 
     public class Settings

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Manifest version="1">
+  <CheckInterval>10</CheckInterval>
+  <AppVersion>1.6</AppVersion>
+  <RemoteConfigUri>http://192.168.178.92/luckyv/update.xml</RemoteConfigUri>
+  <SecurityToken>B68EF4A7-E787-4CC4-B020-878BA649B4CD</SecurityToken>
+  <BaseUri>http://192.168.178.92/luckyv/launcher/</BaseUri>
+  <Payload>LST-Busline-v1.6.zip</Payload>
+</Manifest>
