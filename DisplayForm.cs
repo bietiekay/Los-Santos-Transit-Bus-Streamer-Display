@@ -158,6 +158,8 @@ namespace LSTBusline
             idText_Line1 = ledMatrixControl.AddTextItem(GenerateLine1(), new Point(25, 0), ItemDirection.Right, ItemSpeed.Idle);
             idText_Line2 = ledMatrixControl.AddTextItem(GenerateLine2(), new Point(25, 8), ItemDirection.Right, ItemSpeed.Idle);
 
+            // Line Abort Window
+            LinienAbbruchZeitUpDownControl.Value = Konfiguration.settings.lineabortwindow;
 
             // Init the flags
             m_bIsOn = false;
@@ -444,10 +446,12 @@ namespace LSTBusline
 
         public DateTime GetNearestTimeInTheFutureForMinute(int MinuteInput)
         {
+            int Minute = MinuteInput + Konfiguration.settings.lineabortwindow;
+            if (Minute > 60) { Minute = 60 - Minute; }
 
             DateTime output = new DateTime(DateTime.Now.Year, DateTime.Now.Month,DateTime.Now.Day, DateTime.Now.Hour, MinuteInput, DateTime.Now.Second);
 
-            if (DateTime.Now.Minute > MinuteInput)
+            if (DateTime.Now.Minute > Minute)
                 output = output.AddHours(1);
 
             return output;
@@ -641,6 +645,17 @@ namespace LSTBusline
         {
             var myForm = new ReleaseNotesCopyrightsAndLicenses();
             myForm.Show();
+        }
+
+        private void LinienAbbruchZeitUpDownControl_ValueChanged(object sender, EventArgs e)
+        {
+            Konfiguration.settings.lineabortwindow = Convert.ToInt32(LinienAbbruchZeitUpDownControl.Value);
+            WriteConfiguration(Konfiguration);
+        }
+
+        private void toolTip1_Popup(object sender, PopupEventArgs e)
+        {
+
         }
     }
 }

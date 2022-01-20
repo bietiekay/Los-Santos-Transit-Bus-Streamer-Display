@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DisplayForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -43,6 +44,9 @@
             this.button_switchmode = new System.Windows.Forms.Button();
             this.pbtHide = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.LinienAbbruchZeitUpDownControl = new System.Windows.Forms.NumericUpDown();
             this.label18 = new System.Windows.Forms.Label();
             this.nudLedSize = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
@@ -52,10 +56,12 @@
             this.pbtDisplayLedOff = new System.Windows.Forms.Button();
             this.pbtDisplayLedOn = new System.Windows.Forms.Button();
             this.ledMatrixControl = new LedMatrixControlNamespace.LedMatrixControl();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LinienAbbruchZeitUpDownControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLedSize)).BeginInit();
             this.SuspendLayout();
             // 
@@ -204,6 +210,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.LinienAbbruchZeitUpDownControl);
             this.groupBox2.Controls.Add(this.label18);
             this.groupBox2.Controls.Add(this.nudLedSize);
             this.groupBox2.Controls.Add(this.label12);
@@ -219,7 +228,35 @@
             this.groupBox2.Size = new System.Drawing.Size(402, 150);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "LED Einstellungen";
+            this.groupBox2.Text = "LED und Linien Einstellungen";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(348, 25);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(28, 15);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "min";
+            // 
+            // label2
+            // 
+            this.label2.AccessibleDescription = "test";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(189, 25);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(110, 15);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Abfahrtzeittoleranz:";
+            this.toolTip1.SetToolTip(this.label2, "Das Zeitfenster in dem noch nicht die nächste Abfahrzeit angezeigt wird.");
+            // 
+            // LinienAbbruchZeitUpDownControl
+            // 
+            this.LinienAbbruchZeitUpDownControl.Location = new System.Drawing.Point(303, 23);
+            this.LinienAbbruchZeitUpDownControl.Name = "LinienAbbruchZeitUpDownControl";
+            this.LinienAbbruchZeitUpDownControl.Size = new System.Drawing.Size(39, 23);
+            this.LinienAbbruchZeitUpDownControl.TabIndex = 16;
+            this.LinienAbbruchZeitUpDownControl.ValueChanged += new System.EventHandler(this.LinienAbbruchZeitUpDownControl_ValueChanged);
             // 
             // label18
             // 
@@ -259,7 +296,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(222, 56);
+            this.label12.Location = new System.Drawing.Point(35, 117);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(51, 15);
@@ -273,7 +310,7 @@
             this.cbxDisplayLedStyle.Items.AddRange(new object[] {
             "Kreis",
             "Quadrat"});
-            this.cbxDisplayLedStyle.Location = new System.Drawing.Point(281, 52);
+            this.cbxDisplayLedStyle.Location = new System.Drawing.Point(94, 114);
             this.cbxDisplayLedStyle.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbxDisplayLedStyle.Name = "cbxDisplayLedStyle";
             this.cbxDisplayLedStyle.Size = new System.Drawing.Size(88, 23);
@@ -283,7 +320,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(190, 25);
+            this.label6.Location = new System.Drawing.Point(3, 87);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(83, 15);
@@ -302,7 +339,7 @@
             // 
             // pbtDisplayLedOff
             // 
-            this.pbtDisplayLedOff.Location = new System.Drawing.Point(281, 19);
+            this.pbtDisplayLedOff.Location = new System.Drawing.Point(94, 81);
             this.pbtDisplayLedOff.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.pbtDisplayLedOff.Name = "pbtDisplayLedOff";
             this.pbtDisplayLedOff.Size = new System.Drawing.Size(88, 27);
@@ -337,6 +374,10 @@
             this.ledMatrixControl.TabIndex = 2;
             this.ledMatrixControl.Text = "ledMatrixControl";
             // 
+            // toolTip1
+            // 
+            this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
+            // 
             // DisplayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -357,6 +398,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LinienAbbruchZeitUpDownControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLedSize)).EndInit();
             this.ResumeLayout(false);
 
@@ -386,6 +428,10 @@
         private Button Lizenzen;
         private GroupBox groupBox3;
         private TextBox UpdateStatusTextbox;
+        private Label label3;
+        private Label label2;
+        private NumericUpDown LinienAbbruchZeitUpDownControl;
+        private ToolTip toolTip1;
     }
 }
 

@@ -33,6 +33,7 @@ namespace LST_Busline.Settings
 
     public class Settings
     {
+        public int lineabortwindow { get; set; } = 5;
         public Hotkeys hotkeys { get; set; }
         public Style style { get; set; }
     }
