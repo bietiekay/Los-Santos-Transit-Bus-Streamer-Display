@@ -87,6 +87,7 @@ namespace LSTBusline
         KeyboardHookManager _kManager;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Timer timer3;
 
         String BusLine =  "###############";
         String NextStop = "###############";
@@ -126,6 +127,10 @@ namespace LSTBusline
             ledMatrixControl.LedOnColor = Color.FromArgb(Konfiguration?.settings?.style?.led_on_color ?? -256);
             ledMatrixControl.LedOffColor = Color.FromArgb(Konfiguration?.settings?.style?.led_off_color ?? -12566464);
             ledMatrixControl.SizeCoeff = (double)Konfiguration.settings.style.led_size_coefficient;
+
+            currentTimeStopOnLineChange.Checked = Konfiguration.settings.autosuggeststoponlinechange;
+            autoSwitchAfterFirst.Checked = Konfiguration.settings.autoforwardlineafterfirst;
+
             if (Konfiguration.settings.style?.ledtype == 0)
             {
                 ledMatrixControl.SetLedStyle(LedSyle.Round);
@@ -152,7 +157,7 @@ namespace LSTBusline
             // Add the text item to the conrol
             //idLogo = ledMatrixControl.AddTextItem(tbxTx1.Text, new Point(0, 0), ItemDirection.Right, ItemSpeed.Idle);
             idCurrentTime =  ledMatrixControl.AddTextItem(GenerateCurrentTimeString(), new Point(165, 0), ItemDirection.Right, ItemSpeed.Idle);
-            idNextStopTime = ledMatrixControl.AddTextItem(GenerateNextStopTime(), new Point(165, 8), ItemDirection.Right, ItemSpeed.Idle);
+            idNextStopTime = ledMatrixControl.AddTextItem(GenerateNextSelectedStopTime(), new Point(165, 8), ItemDirection.Right, ItemSpeed.Idle);
             idLogo = ledMatrixControl.AddTextItem(GenerateLogo(), new Point(0, 0), ItemDirection.Right, ItemSpeed.Idle);
 
             idText_Line1 = ledMatrixControl.AddTextItem(GenerateLine1(), new Point(25, 0), ItemDirection.Right, ItemSpeed.Idle);
@@ -304,7 +309,7 @@ namespace LSTBusline
         }
         protected void HandleHotKey_LineChange()
         {
-            Debug.WriteLine("Linienwechsel");
+            Debug.WriteLine("Linienwechsel");            
 
             if ((currentLine + 1) > Konfiguration.modes[currentMode].lines.Count() - 1)
             {
@@ -317,8 +322,28 @@ namespace LSTBusline
                 currentLine += 1;
             }
 
-            // reset der Stops
-            currentStop = 0;
+            if (!Konfiguration.settings.autosuggeststoponlinechange)
+            {
+                // reset der Stops - wir starten beim ersten Stop
+                currentStop = 0;
+            }
+            else
+            {
+               // den richtigen Stop vorauswählen - das ist der nächstmögliche entsprechend der aktuellen Uhrzeit
+               for(int i = 0; i <= Konfiguration.modes[currentMode].lines[currentLine].stops.Count()-1; i++)
+               {
+                    
+                    DateTime stoptime = GenerateNextStopTime(currentMode,currentLine,i);
+                    if (stoptime <= DateTime.Now)
+                    {
+                        //do something
+                        Debug.WriteLine(Konfiguration.modes[currentMode].lines[currentLine].stops[i].name);
+                        Debug.WriteLine(stoptime);
+                        currentStop = i;
+                    }
+                }
+            }
+            
             invalidated = true;
         }
 
@@ -343,38 +368,6 @@ namespace LSTBusline
             invalidated = true;
 
         }
-
-        //protected override void WndProc(ref Message m)
-        //{
-        //    // 5. Catch when a HotKey is pressed !
-        //    if (m.Msg == 0x0312)
-        //    {
-        //        int id = m.WParam.ToInt32();
-        //        //MessageBox.Show(string.Format("Hotkey #{0} pressed", id));
-        //        switch (id)
-        //        {
-        //            case 1:
-        //                Debug.WriteLine("Nächster Halt");
-        //                break;
-        //            case 2:
-        //                Debug.WriteLine("Vorheriger Halt");
-        //                break;
-        //            case 3:
-        //                Debug.WriteLine("Reset");
-        //                break;
-        //            case 4:
-        //                Debug.WriteLine("Linienwechsel");
-        //                break;
-        //            case 5:
-        //                Debug.WriteLine("Moduswechsel");
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //    }
-
-        //    base.WndProc(ref m);
-        //}
         #endregion
 
         #region Timer Display Update
@@ -382,18 +375,48 @@ namespace LSTBusline
         {
             timer1 = new System.Windows.Forms.Timer();
             timer1.Tick += new EventHandler(UpdateDisplayCycle);
-            timer1.Interval = 100; // in miliseconds
+            timer1.Interval = 200; // in miliseconds
             timer1.Start();
 
             timer2 = new System.Windows.Forms.Timer();
             timer2.Tick += new EventHandler(ReRegisterHotkeys);
             timer2.Interval = 10000;
             timer2.Start();
+
+            timer3 = new System.Windows.Forms.Timer();
+            timer3.Tick += new EventHandler(AutoForward);
+            timer3.Interval = 1000;
+            timer3.Start();
+        }
+
+        private void AutoForward(object sender, EventArgs e)
+        {            
+            if ((Konfiguration.settings.autoforwardlineafterfirst) && currentStop > 0)
+            {
+                //Debug.WriteLine("AutoForward");
+                // auto forward...
+                int tempstop = 0;
+                // den nächsten Stop vorauswählen - das ist der nächstmögliche entsprechend der aktuellen Uhrzeit
+                for (int i = 0; i <= Konfiguration.modes[currentMode].lines[currentLine].stops.Count() - 1; i++)
+                {
+                    DateTime stoptime = GenerateNextStopTime(currentMode, currentLine, i);
+                    if (stoptime <= DateTime.Now)
+                    {
+                        //do something
+                        tempstop = i;
+                    }
+                }
+                if (tempstop > currentStop)
+                {
+                    currentStop = tempstop;
+                    invalidated = true;
+                }
+            }
         }
 
         private void ReRegisterHotkeys(object sender, EventArgs e)
         {
-            Debug.WriteLine("Hotkeys re-register");
+            //Debug.WriteLine("Hotkeys re-register");
             RegisterHotkeys(_kManager);
         }
 
@@ -417,11 +440,11 @@ namespace LSTBusline
                 // Update Line2
                 ledMatrixControl.SetItemText(idText_Line2, GenerateLine2());
                 // Update Nächster Halt
-                ledMatrixControl.SetItemText(idNextStopTime, GenerateNextStopTime());
+                ledMatrixControl.SetItemText(idNextStopTime, GenerateNextSelectedStopTime());
                 
                 // stop updating
                 invalidated = false;
-            }
+            }           
 
             //Debug.WriteLine("Mode: " + currentMode + " Line: " + currentLine + " Stop:" + currentStop);
         }
@@ -457,12 +480,17 @@ namespace LSTBusline
             return output;
         }
 
-        public String GenerateNextStopTime()
+        public String GenerateNextSelectedStopTime()
+        {
+            return "¦¦¦ :" + GenerateNextStopTime(currentMode, currentLine, currentStop).Minute.ToString("D2");
+        }
+
+        public DateTime GenerateNextStopTime(int mode, int line, int stop)
         {
             TimeSpan TimeDistance = TimeSpan.MaxValue;
             DateTime Abfahrtzeit = DateTime.Now;
 
-            foreach(int Abfahrtszeit in Konfiguration.modes[currentMode].lines[currentLine].stops[currentStop].leavetimes_hourly)
+            foreach(int Abfahrtszeit in Konfiguration.modes[mode].lines[line].stops[stop].leavetimes_hourly)
             {
                 DateTime nearestTimeForAbfahrzeit = GetNearestTimeInTheFutureForMinute(Abfahrtszeit);
                 // qualifiziert weil in der Zukunft?
@@ -476,7 +504,7 @@ namespace LSTBusline
                 }
             }
 
-            return "¦¦¦ :" + Abfahrtzeit.Minute.ToString("D2");
+            return Abfahrtzeit;
         }
         public String GenerateLogo()
         {
@@ -656,6 +684,18 @@ namespace LSTBusline
         private void toolTip1_Popup(object sender, PopupEventArgs e)
         {
 
+        }
+
+        private void currentTimeStopOnLineChange_CheckedChanged(object sender, EventArgs e)
+        {
+            Konfiguration.settings.autosuggeststoponlinechange = currentTimeStopOnLineChange.Checked;
+            WriteConfiguration(Konfiguration);
+        }
+
+        private void autoSwitchAfterFirst_CheckedChanged(object sender, EventArgs e)
+        {
+            Konfiguration.settings.autoforwardlineafterfirst = autoSwitchAfterFirst.Checked;
+            WriteConfiguration(Konfiguration);
         }
     }
 }

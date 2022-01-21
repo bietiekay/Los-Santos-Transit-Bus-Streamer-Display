@@ -34,6 +34,9 @@ namespace LST_Busline.Settings
     public class Settings
     {
         public int lineabortwindow { get; set; } = 5;
+
+        public bool autosuggeststoponlinechange { get; set; } = false;
+        public bool autoforwardlineafterfirst { get; set; } = false;
         public Hotkeys hotkeys { get; set; }
         public Style style { get; set; }
     }

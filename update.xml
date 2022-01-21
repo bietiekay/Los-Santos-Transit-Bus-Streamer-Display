@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Manifest version="7">
+<Manifest version="8">
   <CheckInterval>10</CheckInterval>
-  <AppVersion>1.7</AppVersion>
+  <AppVersion>1.8</AppVersion>
   <RemoteConfigUri>https://www.schrankmonster.de/lst-busline-updater/update.xml</RemoteConfigUri>
   <SecurityToken>B68EF4A7-E787-4CC4-B020-878BA649B4CD</SecurityToken>
   <BaseUri>https://www.schrankmonster.de/lst-busline-updater/</BaseUri>
-  <Payload>LST-Busline-v1.7-update.zip</Payload>
+  <Payload>LST-Busline-v1.8-update.zip</Payload>
 </Manifest>
