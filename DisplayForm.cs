@@ -442,7 +442,7 @@ namespace LSTBusline
                 }
                 else
                 {
-                    if ((savedStatisticStopTime - DateTime.Now).TotalMinutes <= 1)
+                    if ((DateTime.Now - savedStatisticStopTime).TotalMinutes <= 1)
                     {
                         //Debug.WriteLine("ontime");
                         prefix = "";
@@ -477,9 +477,9 @@ namespace LSTBusline
                 {
                     for (int i = 0; i <= Konfiguration.modes[currentMode].lines[currentLine].stops.Count() - 1; i++)
                     {
-                        //Debug.WriteLine(Konfiguration.modes[currentMode].lines[currentLine].stops[i].name + " - " + GenerateNextStopTime(currentMode, currentLine, i, true));
-                        DateTime stoptime = GenerateNextStopTime(currentMode, currentLine, i, true);
-                        if (stoptime <= DateTime.Now)
+                        //Debug.WriteLine(Konfiguration.modes[currentMode].lines[currentLine].stops[i].name + " - " + GenerateNextStopTime(currentMode, currentLine, i, false));
+                        DateTime stoptime = GenerateNextStopTime(currentMode, currentLine, i, false);
+                        if (stoptime < DateTime.Now)
                         {
                             //do something
                             tempstop = i;
