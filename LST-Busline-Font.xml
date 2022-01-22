@@ -1011,44 +1011,44 @@
 			<LedLine LineNumber="6" LineLedOn="_______"/>
 			<LedLine LineNumber="7" LineLedOn="_______"/>
 		</LedMatrixSymbol>
-		<LedMatrixSymbol SymbolCode="162" Description="¢">
+		<LedMatrixSymbol SymbolCode="162" Description="¢?">
 			<LedLine LineNumber="0"  LineLedOn="########################"/>
-			<LedLine LineNumber="1"  LineLedOn="##__##__############__##"/>
-			<LedLine LineNumber="2"  LineLedOn="##__##__############__##"/>
-			<LedLine LineNumber="3"  LineLedOn="##__##__##_____##_____##"/>
-			<LedLine LineNumber="4"  LineLedOn="##__##__##_____##_____##"/>
-			<LedLine LineNumber="5"  LineLedOn="##__##__##_____##_____##"/>
-			<LedLine LineNumber="6"  LineLedOn="##__##__##_____##_____##"/>
-			<LedLine LineNumber="7"  LineLedOn="##__##__#####__##_____##"/>
-			<LedLine LineNumber="8"  LineLedOn="##__##__#####__##_____##"/>
-			<LedLine LineNumber="9"  LineLedOn="##__##_____##__##_____##"/>
-			<LedLine LineNumber="10" LineLedOn="##__##_____##__##_____##"/>
-			<LedLine LineNumber="11" LineLedOn="##__##_____##__##_____##"/>
-			<LedLine LineNumber="12" LineLedOn="##__##_____##__##_____##"/>
-			<LedLine LineNumber="13" LineLedOn="##__#########__##_____##"/>
-			<LedLine LineNumber="14" LineLedOn="##__#########__##_____##"/>
-			<LedLine LineNumber="15" LineLedOn="##____________________##"/>
+			<LedLine LineNumber="1"  LineLedOn="#__##__________________#"/>
+			<LedLine LineNumber="2"  LineLedOn="#__##__________________#"/>
+			<LedLine LineNumber="3"  LineLedOn="#__##__________________#"/>
+			<LedLine LineNumber="4"  LineLedOn="#__##___################"/>
+			<LedLine LineNumber="5"  LineLedOn="#__##___################"/>
+			<LedLine LineNumber="6"  LineLedOn="#__##___##_______##____#"/>
+			<LedLine LineNumber="7"  LineLedOn="#__##___##_______##____#"/>
+			<LedLine LineNumber="8"  LineLedOn="#__##___######___##____#"/>
+			<LedLine LineNumber="9"  LineLedOn="#__##___######___##____#"/>
+			<LedLine LineNumber="10" LineLedOn="#__##_______##___##____#"/>
+			<LedLine LineNumber="11" LineLedOn="#__##_______##___##____#"/>
+			<LedLine LineNumber="12" LineLedOn="#__###########___##____#"/>
+			<LedLine LineNumber="13" LineLedOn="#__###########___##____#"/>
+			<LedLine LineNumber="14" LineLedOn="#________________##____#"/>
+			<LedLine LineNumber="15" LineLedOn="#________________##____#"/>
 			<LedLine LineNumber="16" LineLedOn="########################"/>
 		</LedMatrixSymbol>
 		<LedMatrixSymbol SymbolCode="163" Description="£">
-			<LedLine LineNumber="0"  LineLedOn="########################"/>
-			<LedLine LineNumber="1"  LineLedOn="##__##__############__##"/>
-			<LedLine LineNumber="2"  LineLedOn="##__##__############__##"/>
-			<LedLine LineNumber="3"  LineLedOn="##__##__##_____##_____##"/>
-			<LedLine LineNumber="4"  LineLedOn="##__##__##_____##_____##"/>
-			<LedLine LineNumber="5"  LineLedOn="##__##__##_____##_____##"/>
-			<LedLine LineNumber="6"  LineLedOn="##__##__##_____##_____##"/>
-			<LedLine LineNumber="7"  LineLedOn="##__##__#####__##_____##"/>
-			<LedLine LineNumber="8"  LineLedOn="##__##__#####__##_____##"/>
-			<LedLine LineNumber="9"  LineLedOn="##__##_____##__##_____##"/>
-			<LedLine LineNumber="10" LineLedOn="##__##_____##__##_____##"/>
-			<LedLine LineNumber="11" LineLedOn="##__##_____##__##_____##"/>
-			<LedLine LineNumber="12" LineLedOn="##__##_____##__##_____##"/>
-			<LedLine LineNumber="13" LineLedOn="##__#########__##_____##"/>
-			<LedLine LineNumber="14" LineLedOn="##__#########__##_____##"/>
-			<LedLine LineNumber="15" LineLedOn="##____________________##"/>
-			<LedLine LineNumber="16" LineLedOn="########################"/>
-		</LedMatrixSymbol>
+				<LedLine LineNumber="0"  LineLedOn="________________________"/>
+				<LedLine LineNumber="1"  LineLedOn="_##__##################_"/>
+				<LedLine LineNumber="2"  LineLedOn="_##__##################_"/>
+				<LedLine LineNumber="3"  LineLedOn="_##__##################_"/>
+				<LedLine LineNumber="4"  LineLedOn="_##__###________________"/>
+				<LedLine LineNumber="5"  LineLedOn="_##__###________________"/>
+				<LedLine LineNumber="6"  LineLedOn="_##__###__#######__####_"/>
+				<LedLine LineNumber="7"  LineLedOn="_##__###__#######__####_"/>
+				<LedLine LineNumber="8"  LineLedOn="_##__###______###__####_"/>
+				<LedLine LineNumber="9"  LineLedOn="_##__###______###__####_"/>
+				<LedLine LineNumber="10" LineLedOn="_##__#######__###__####_"/>
+				<LedLine LineNumber="11" LineLedOn="_##__#######__###__####_"/>
+				<LedLine LineNumber="12" LineLedOn="_##___________###__####_"/>
+				<LedLine LineNumber="13" LineLedOn="_##___________###__####_"/>
+				<LedLine LineNumber="14" LineLedOn="_################__####_"/>
+				<LedLine LineNumber="15" LineLedOn="_################__####_"/>
+				<LedLine LineNumber="16" LineLedOn="________________________"/>
+			</LedMatrixSymbol>
 		<LedMatrixSymbol SymbolCode="164" Description="¤">
 			<LedLine LineNumber="0" LineLedOn="##__###"/>
 			<LedLine LineNumber="1" LineLedOn="##_____"/>

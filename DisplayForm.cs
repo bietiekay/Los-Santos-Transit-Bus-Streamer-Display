@@ -73,7 +73,7 @@ namespace LSTBusline
         }
         #endregion
 
-
+        private readonly object lockObject = new object();
 
         int idText_Line1;     
         int idText_Line2;
@@ -88,6 +88,7 @@ namespace LSTBusline
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Timer timer3;
+        private System.Windows.Forms.Timer timer4;
 
         String BusLine =  "###############";
         String NextStop = "###############";
@@ -96,6 +97,12 @@ namespace LSTBusline
         int currentMode = 0; // aktueller Modus
         int currentLine = 0; // aktuelle Linie im aktuellen Modus
         int currentStop = 0; // aktueller Halt der aktuellen Linie im aktuellen Modus
+
+
+        int savedStatisticMode = int.MaxValue;
+        int savedStatisticLine = int.MaxValue;
+        int savedStatisticStop = int.MaxValue;
+        DateTime savedStatisticStopTime = DateTime.MinValue;
 
         bool invalidated = false;
 
@@ -128,9 +135,14 @@ namespace LSTBusline
             ledMatrixControl.LedOffColor = Color.FromArgb(Konfiguration?.settings?.style?.led_off_color ?? -12566464);
             ledMatrixControl.SizeCoeff = (double)Konfiguration.settings.style.led_size_coefficient;
 
+
+            invertLogoCheckbox.Checked = Konfiguration.settings.style.logoinverted;
             currentTimeStopOnLineChange.Checked = Konfiguration.settings.autosuggeststoponlinechange;
             autoSwitchAfterFirst.Checked = Konfiguration.settings.autoforwardlineafterfirst;
-
+            if (autoSwitchAfterFirst.Checked)
+                LinienAbbruchZeitUpDownControl.Enabled = false;
+            else
+                LinienAbbruchZeitUpDownControl.Enabled = true;
             if (Konfiguration.settings.style?.ledtype == 0)
             {
                 ledMatrixControl.SetLedStyle(LedSyle.Round);
@@ -180,6 +192,7 @@ namespace LSTBusline
 
             var updater = new UpdaterService.Diagnostics.Update.Updater(StartUpAndUpdate.ReadResourceHelper.ReadResource("update.xml"));
             updater.StartMonitoring();
+            HandleHotKey_Reset();
         }
 
         #region Konfiguration
@@ -269,102 +282,115 @@ namespace LSTBusline
         protected void HandleHotKey_NextStop()
         {
             Debug.WriteLine("Nächster Halt");            
-
-            if ((currentStop+1) > Konfiguration.modes[currentMode].lines[currentLine].stops.Count() - 1) {
-                // hochzählen geht nicht, wir fangen bei 0 an
-                currentStop = 0;
-            } else
+            lock (lockObject)
             {
-                // eins hochzählen
-                currentStop += 1;
+                if ((currentStop + 1) > Konfiguration.modes[currentMode].lines[currentLine].stops.Count() - 1)
+                {
+                    // hochzählen geht nicht, wir fangen bei 0 an
+                    currentStop = 0;
+                }
+                else
+                {
+                    // eins hochzählen
+                    currentStop += 1;
+                }
             }
-
             invalidated = true;
         }
         protected void HandleHotKey_PreviousStop()
         {
             Debug.WriteLine("Vorheriger Halt");
+            lock (lockObject)
+            {
+                if ((currentStop - 1) < 0)
+                {
+                    // runterzählen geht nicht, wir schalten auf den letzten Stop
+                    currentStop = Konfiguration.modes[currentMode].lines[currentLine].stops.Count() - 1;
+                }
+                else
+                {
+                    // eins runterzählen
+                    currentStop -= 1;
+                }
+            }
 
-            if ((currentStop - 1) < 0)
-            {
-                // runterzählen geht nicht, wir schalten auf den letzten Stop
-                currentStop = Konfiguration.modes[currentMode].lines[currentLine].stops.Count() - 1;
-            }
-            else
-            {
-                // eins runterzählen
-                currentStop -= 1;
-            }
             invalidated = true;
         }
         protected void HandleHotKey_Reset()
         {
             Debug.WriteLine("Reset");
             invalidated = true;
-
-            currentLine = 0;
-            currentMode = 0;
-            currentStop = 0;
+            lock (lockObject)
+            {
+                currentLine = Konfiguration.modes[currentMode].lines.Count() - 1;
+                currentMode = 0;
+                currentStop = 0;
+            }
+            HandleHotKey_LineChange();
             invalidated = true;
         }
         protected void HandleHotKey_LineChange()
         {
             Debug.WriteLine("Linienwechsel");            
+            lock (lockObject)
+            {
+                if ((currentLine + 1) > Konfiguration.modes[currentMode].lines.Count() - 1)
+                {
+                    // hochzählen geht nicht, wir fangen bei 0 an
+                    currentLine = 0;
+                }
+                else
+                {
+                    // eins hochzählen
+                    currentLine += 1;
+                }
 
-            if ((currentLine + 1) > Konfiguration.modes[currentMode].lines.Count() - 1)
-            {
-                // hochzählen geht nicht, wir fangen bei 0 an
-                currentLine = 0;
-            }
-            else
-            {
-                // eins hochzählen
-                currentLine += 1;
-            }
-
-            if (!Konfiguration.settings.autosuggeststoponlinechange)
-            {
-                // reset der Stops - wir starten beim ersten Stop
-                currentStop = 0;
-            }
-            else
-            {
-               // den richtigen Stop vorauswählen - das ist der nächstmögliche entsprechend der aktuellen Uhrzeit
-               for(int i = 0; i <= Konfiguration.modes[currentMode].lines[currentLine].stops.Count()-1; i++)
-               {
-                    
-                    DateTime stoptime = GenerateNextStopTime(currentMode,currentLine,i);
-                    if (stoptime <= DateTime.Now)
+                if (!Konfiguration.settings.autosuggeststoponlinechange)
+                {
+                    // reset der Stops - wir starten beim ersten Stop
+                    currentStop = 0;
+                }
+                else
+                {
+                    // den richtigen Stop vorauswählen - das ist der nächstmögliche entsprechend der aktuellen Uhrzeit
+                    for (int i = 0; i <= Konfiguration.modes[currentMode].lines[currentLine].stops.Count() - 1; i++)
                     {
-                        //do something
-                        Debug.WriteLine(Konfiguration.modes[currentMode].lines[currentLine].stops[i].name);
-                        Debug.WriteLine(stoptime);
-                        currentStop = i;
+
+                        DateTime stoptime = GenerateNextStopTime(currentMode, currentLine, i,false);
+                        if (stoptime <= DateTime.Now)
+                        {
+                            //do something
+                            //Debug.WriteLine(Konfiguration.modes[currentMode].lines[currentLine].stops[i].name);
+                            //Debug.WriteLine(stoptime);
+                            currentStop = i;
+                        }
                     }
                 }
             }
-            
+
             invalidated = true;
         }
 
         protected void HandleHotKey_ModeChange()
         {
             Debug.WriteLine("Moduswechsel");
-
-            if ((currentMode + 1) > Konfiguration.modes.Count() - 1)
+            lock (lockObject)
             {
-                // hochzählen geht nicht, wir fangen bei 0 an
-                currentMode = 0;
-            }
-            else
-            {
-                // eins hochzählen
-                currentMode += 1;
-            }
+                if ((currentMode + 1) > Konfiguration.modes.Count() - 1)
+                {
+                    // hochzählen geht nicht, wir fangen bei 0 an
+                    currentMode = 0;
+                }
+                else
+                {
+                    // eins hochzählen
+                    currentMode += 1;
+                }
 
-            // reset der anderen Werte
-            currentLine = 0;
-            currentStop = 0;
+                // reset der anderen Werte
+                currentLine = 0;
+                currentStop = 0;
+            }
             invalidated = true;
 
         }
@@ -387,6 +413,55 @@ namespace LSTBusline
             timer3.Tick += new EventHandler(AutoForward);
             timer3.Interval = 1000;
             timer3.Start();
+
+            timer4 = new System.Windows.Forms.Timer();
+            timer4.Tick += new EventHandler(UpdateStatistics);
+            timer4.Interval = 1000;
+            timer4.Start();
+
+
+        }
+        private void UpdateStatistics(object sender, EventArgs e)
+        {
+            if ( (savedStatisticMode != currentMode) || (savedStatisticLine != currentLine) || (savedStatisticStop != currentStop) )
+            {
+                // es wurde umgeschaltet
+                // hole nächste Stop Zeit
+                savedStatisticStopTime = GenerateNextStopTime(currentMode, currentLine, currentStop, false);
+            }
+
+            if (savedStatisticStopTime != DateTime.MinValue)
+            {
+                String prefix = "";
+                String suffix = "";
+                if (savedStatisticStopTime >= DateTime.Now)
+                {
+                    //Debug.WriteLine("early");
+                    prefix = "-";
+                    suffix = "früh";
+                }
+                else
+                {
+                    if ((savedStatisticStopTime - DateTime.Now).TotalMinutes <= 1)
+                    {
+                        //Debug.WriteLine("ontime");
+                        prefix = "";
+                        suffix = "pünktlich";
+                    }
+                    else
+                    {
+                        //Debug.WriteLine("late");                        
+                        prefix = "+";
+                        suffix = "verspätet";
+                    }
+
+                }
+
+                //tooLateTime.Text = ;
+                timeToNextStop.Text = prefix + (savedStatisticStopTime - DateTime.Now).ToString(@"mm\:ss")+ " - "+ suffix;
+                //Debug.WriteLine(stopTime);
+
+            }
         }
 
         private void AutoForward(object sender, EventArgs e)
@@ -396,20 +471,25 @@ namespace LSTBusline
                 //Debug.WriteLine("AutoForward");
                 // auto forward...
                 int tempstop = 0;
+                //Debug.WriteLine("-----");
                 // den nächsten Stop vorauswählen - das ist der nächstmögliche entsprechend der aktuellen Uhrzeit
-                for (int i = 0; i <= Konfiguration.modes[currentMode].lines[currentLine].stops.Count() - 1; i++)
+                lock (lockObject)
                 {
-                    DateTime stoptime = GenerateNextStopTime(currentMode, currentLine, i);
-                    if (stoptime <= DateTime.Now)
+                    for (int i = 0; i <= Konfiguration.modes[currentMode].lines[currentLine].stops.Count() - 1; i++)
                     {
-                        //do something
-                        tempstop = i;
+                        //Debug.WriteLine(Konfiguration.modes[currentMode].lines[currentLine].stops[i].name + " - " + GenerateNextStopTime(currentMode, currentLine, i, true));
+                        DateTime stoptime = GenerateNextStopTime(currentMode, currentLine, i, true);
+                        if (stoptime <= DateTime.Now)
+                        {
+                            //do something
+                            tempstop = i;
+                        }
                     }
-                }
-                if (tempstop > currentStop)
-                {
-                    currentStop = tempstop;
-                    invalidated = true;
+                    if (tempstop > currentStop)
+                    {
+                        currentStop = tempstop;
+                        invalidated = true;
+                    }
                 }
             }
         }
@@ -467,12 +547,15 @@ namespace LSTBusline
                 return "¥" + DateTime.Now.ToString("HH¦mm");
         }
 
-        public DateTime GetNearestTimeInTheFutureForMinute(int MinuteInput)
-        {
+        public DateTime GetNearestTimeInTheFutureForMinute(int MinuteInput,bool ignoreAbortWindow)
+        {            
             int Minute = MinuteInput + Konfiguration.settings.lineabortwindow;
+
+            if (ignoreAbortWindow) Minute = MinuteInput;
+
             if (Minute > 60) { Minute = 60 - Minute; }
 
-            DateTime output = new DateTime(DateTime.Now.Year, DateTime.Now.Month,DateTime.Now.Day, DateTime.Now.Hour, MinuteInput, DateTime.Now.Second);
+            DateTime output = new DateTime(DateTime.Now.Year, DateTime.Now.Month,DateTime.Now.Day, DateTime.Now.Hour, MinuteInput, 0);
 
             if (DateTime.Now.Minute > Minute)
                 output = output.AddHours(1);
@@ -482,33 +565,44 @@ namespace LSTBusline
 
         public String GenerateNextSelectedStopTime()
         {
-            return "¦¦¦ :" + GenerateNextStopTime(currentMode, currentLine, currentStop).Minute.ToString("D2");
+            return "¦¦¦ :" + GenerateNextStopTime(currentMode, currentLine, currentStop, false).Minute.ToString("D2");
         }
 
-        public DateTime GenerateNextStopTime(int mode, int line, int stop)
+        public DateTime GenerateNextStopTime(int mode, int line, int stop, bool ignoreAbortWindow)
         {
             TimeSpan TimeDistance = TimeSpan.MaxValue;
-            DateTime Abfahrtzeit = DateTime.Now;
+            DateTime Abfahrtzeit = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, 0);
 
-            foreach(int Abfahrtszeit in Konfiguration.modes[mode].lines[line].stops[stop].leavetimes_hourly)
+            lock (lockObject)
             {
-                DateTime nearestTimeForAbfahrzeit = GetNearestTimeInTheFutureForMinute(Abfahrtszeit);
-                // qualifiziert weil in der Zukunft?
-                if (TimeDistance == TimeSpan.MaxValue)
-                        TimeDistance = nearestTimeForAbfahrzeit-DateTime.Now;
-
-                if (TimeDistance > nearestTimeForAbfahrzeit-DateTime.Now)
+                foreach (int Abfahrtszeit in Konfiguration.modes[mode].lines[line].stops[stop].leavetimes_hourly)
                 {
-                    TimeDistance = nearestTimeForAbfahrzeit - DateTime.Now;
-                    Abfahrtzeit = nearestTimeForAbfahrzeit;
+                    DateTime nearestTimeForAbfahrzeit = GetNearestTimeInTheFutureForMinute(Abfahrtszeit, ignoreAbortWindow);
+
+                    // qualifiziert weil in der Zukunft?
+                    if (TimeDistance == TimeSpan.MaxValue)
+                        TimeDistance = nearestTimeForAbfahrzeit - DateTime.Now;
+
+                    if (TimeDistance < nearestTimeForAbfahrzeit - DateTime.Now)
+                    {
+                        TimeDistance = nearestTimeForAbfahrzeit - DateTime.Now;                        
+                    }
+                    else
+                    {
+                        TimeDistance = nearestTimeForAbfahrzeit - DateTime.Now;
+                        Abfahrtzeit = nearestTimeForAbfahrzeit;
+                    }
+
                 }
             }
-
-            return Abfahrtzeit;
+            return new DateTime(Abfahrtzeit.Year,Abfahrtzeit.Month,Abfahrtzeit.Day,Abfahrtzeit.Hour,Abfahrtzeit.Minute,0);
         }
         public String GenerateLogo()
         {
-            return "¢";
+            if (Konfiguration.settings.style.logoinverted)
+                return "£";
+            else
+                return "¢";
         }
         public String GenerateLine1()
         {
@@ -516,7 +610,8 @@ namespace LSTBusline
             // aktuellen Modus hernehmen und die daraus selektierte Linienbezeichnung anzeigen
             try
             {
-                currentLineName = Konfiguration.modes[currentMode].lines[currentLine].name;
+                lock(lockObject)
+                    currentLineName = Konfiguration.modes[currentMode].lines[currentLine].name;
 
             } catch(Exception)
             {
@@ -531,7 +626,8 @@ namespace LSTBusline
             // aktuellen Modus hernehmen und die daraus selektierte Linienbezeichnung anzeigen
             try
             {
-                nextStopName = Konfiguration.modes[currentMode].lines[currentLine].stops[currentStop].name;
+                lock(lockObject)
+                    nextStopName = Konfiguration.modes[currentMode].lines[currentLine].stops[currentStop].name;
 
             }
             catch (Exception)
@@ -695,6 +791,17 @@ namespace LSTBusline
         private void autoSwitchAfterFirst_CheckedChanged(object sender, EventArgs e)
         {
             Konfiguration.settings.autoforwardlineafterfirst = autoSwitchAfterFirst.Checked;
+            if (autoSwitchAfterFirst.Checked)
+                LinienAbbruchZeitUpDownControl.Enabled = false;
+            else
+                LinienAbbruchZeitUpDownControl.Enabled = true;
+            WriteConfiguration(Konfiguration);
+        }
+
+        private void invertLogoCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            Konfiguration.settings.style.logoinverted = invertLogoCheckbox.Checked;
+            ledMatrixControl.SetItemText(idLogo, GenerateLogo());
             WriteConfiguration(Konfiguration);
         }
     }

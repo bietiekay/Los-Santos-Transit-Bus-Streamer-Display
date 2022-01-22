@@ -28,7 +28,8 @@ namespace LST_Busline.Settings
         public int windowposition_x { get; set; } = -1;
         public int windowposition_y { get; set; } = -1;
         public int windowheight { get; set; } = 545;
-        public int windowwidth { get; set; } = 1274;
+        public int windowwidth { get; set; } = 1274;      
+        public bool logoinverted { get; set; } = false;
     }
 
     public class Settings

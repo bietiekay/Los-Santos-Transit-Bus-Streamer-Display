@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DisplayForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.timeToNextStop = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.UpdateStatusTextbox = new System.Windows.Forms.TextBox();
             this.versionlabel = new System.Windows.Forms.Label();
@@ -40,11 +41,11 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button_previousstop = new System.Windows.Forms.Button();
             this.button_nextstop = new System.Windows.Forms.Button();
-            this.button_reset = new System.Windows.Forms.Button();
             this.button_switchline = new System.Windows.Forms.Button();
             this.button_switchmode = new System.Windows.Forms.Button();
             this.pbtHide = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.invertLogoCheckbox = new System.Windows.Forms.CheckBox();
             this.autoSwitchAfterFirst = new System.Windows.Forms.CheckBox();
             this.currentTimeStopOnLineChange = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -86,6 +87,7 @@
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.timeToNextStop);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.UpdateStatusTextbox);
             this.groupBox3.Controls.Add(this.versionlabel);
@@ -98,14 +100,23 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Informationen";
             // 
+            // timeToNextStop
+            // 
+            this.timeToNextStop.AutoSize = true;
+            this.timeToNextStop.Location = new System.Drawing.Point(144, 23);
+            this.timeToNextStop.Name = "timeToNextStop";
+            this.timeToNextStop.Size = new System.Drawing.Size(24, 15);
+            this.timeToNextStop.TabIndex = 13;
+            this.timeToNextStop.Text = "00s";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 25);
+            this.label4.Location = new System.Drawing.Point(6, 23);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 15);
+            this.label4.Size = new System.Drawing.Size(132, 15);
             this.label4.TabIndex = 11;
-            this.label4.Text = "label4";
+            this.label4.Text = "Zeit bis nächste Abfahrt";
             // 
             // UpdateStatusTextbox
             // 
@@ -150,12 +161,11 @@
             // 
             this.groupBox1.Controls.Add(this.button_previousstop);
             this.groupBox1.Controls.Add(this.button_nextstop);
-            this.groupBox1.Controls.Add(this.button_reset);
             this.groupBox1.Controls.Add(this.button_switchline);
             this.groupBox1.Controls.Add(this.button_switchmode);
-            this.groupBox1.Location = new System.Drawing.Point(507, 13);
+            this.groupBox1.Location = new System.Drawing.Point(656, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(310, 150);
+            this.groupBox1.Size = new System.Drawing.Size(161, 150);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Steuerung";
@@ -172,23 +182,13 @@
             // 
             // button_nextstop
             // 
-            this.button_nextstop.Location = new System.Drawing.Point(153, 85);
+            this.button_nextstop.Location = new System.Drawing.Point(6, 114);
             this.button_nextstop.Name = "button_nextstop";
             this.button_nextstop.Size = new System.Drawing.Size(141, 23);
             this.button_nextstop.TabIndex = 3;
             this.button_nextstop.Text = "nächster Halt";
             this.button_nextstop.UseVisualStyleBackColor = true;
             this.button_nextstop.Click += new System.EventHandler(this.button_nextstop_Click);
-            // 
-            // button_reset
-            // 
-            this.button_reset.Location = new System.Drawing.Point(6, 121);
-            this.button_reset.Name = "button_reset";
-            this.button_reset.Size = new System.Drawing.Size(92, 23);
-            this.button_reset.TabIndex = 2;
-            this.button_reset.Text = "Reset";
-            this.button_reset.UseVisualStyleBackColor = true;
-            this.button_reset.Click += new System.EventHandler(this.button_reset_Click);
             // 
             // button_switchline
             // 
@@ -223,6 +223,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.invertLogoCheckbox);
             this.groupBox2.Controls.Add(this.autoSwitchAfterFirst);
             this.groupBox2.Controls.Add(this.currentTimeStopOnLineChange);
             this.groupBox2.Controls.Add(this.label3);
@@ -240,32 +241,44 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox2.Size = new System.Drawing.Size(402, 150);
+            this.groupBox2.Size = new System.Drawing.Size(551, 150);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "LED und Linien Einstellungen";
             // 
+            // invertLogoCheckbox
+            // 
+            this.invertLogoCheckbox.AutoSize = true;
+            this.invertLogoCheckbox.Location = new System.Drawing.Point(189, 25);
+            this.invertLogoCheckbox.Name = "invertLogoCheckbox";
+            this.invertLogoCheckbox.Size = new System.Drawing.Size(168, 19);
+            this.invertLogoCheckbox.TabIndex = 21;
+            this.invertLogoCheckbox.Text = "Alternativ Logo verwenden";
+            this.toolTip1.SetToolTip(this.invertLogoCheckbox, "verwendet statt Zeichen 162 das Zeichen 163 aus dem Font.");
+            this.invertLogoCheckbox.UseVisualStyleBackColor = true;
+            this.invertLogoCheckbox.CheckedChanged += new System.EventHandler(this.invertLogoCheckbox_CheckedChanged);
+            // 
             // autoSwitchAfterFirst
             // 
             this.autoSwitchAfterFirst.AutoSize = true;
-            this.autoSwitchAfterFirst.Location = new System.Drawing.Point(189, 86);
+            this.autoSwitchAfterFirst.Location = new System.Drawing.Point(310, 88);
             this.autoSwitchAfterFirst.Name = "autoSwitchAfterFirst";
-            this.autoSwitchAfterFirst.Size = new System.Drawing.Size(169, 19);
+            this.autoSwitchAfterFirst.Size = new System.Drawing.Size(234, 49);
             this.autoSwitchAfterFirst.TabIndex = 20;
-            this.autoSwitchAfterFirst.Text = "automatisch Halt wechseln";
-            this.toolTip1.SetToolTip(this.autoSwitchAfterFirst, "wenn aktiviert wird die Anzeige automatisch entsprechend der Haltezeiten durchsch" +
-        "alten nachdem die erste Haltestelle manuell angefahren wurde");
+            this.autoSwitchAfterFirst.Text = "automatisch Halt wechseln\r\n(bei Haltestellen mit gleicher Abfahrzeit\r\n wird nur d" +
+    "ie letzte angezeigt)";
+            this.toolTip1.SetToolTip(this.autoSwitchAfterFirst, resources.GetString("autoSwitchAfterFirst.ToolTip"));
             this.autoSwitchAfterFirst.UseVisualStyleBackColor = true;
             this.autoSwitchAfterFirst.CheckedChanged += new System.EventHandler(this.autoSwitchAfterFirst_CheckedChanged);
             // 
             // currentTimeStopOnLineChange
             // 
             this.currentTimeStopOnLineChange.AutoSize = true;
-            this.currentTimeStopOnLineChange.Location = new System.Drawing.Point(189, 55);
+            this.currentTimeStopOnLineChange.Location = new System.Drawing.Point(189, 95);
             this.currentTimeStopOnLineChange.Name = "currentTimeStopOnLineChange";
-            this.currentTimeStopOnLineChange.Size = new System.Drawing.Size(159, 19);
+            this.currentTimeStopOnLineChange.Size = new System.Drawing.Size(103, 34);
             this.currentTimeStopOnLineChange.TabIndex = 19;
-            this.currentTimeStopOnLineChange.Text = "Linienwechsel Automatik";
+            this.currentTimeStopOnLineChange.Text = "Linienwechsel \r\nAutomatik";
             this.toolTip1.SetToolTip(this.currentTimeStopOnLineChange, "bei Linienwechsel wird die jeweils aktuellste Haltestelle vorausgewählt");
             this.currentTimeStopOnLineChange.UseVisualStyleBackColor = true;
             this.currentTimeStopOnLineChange.CheckedChanged += new System.EventHandler(this.currentTimeStopOnLineChange_CheckedChanged);
@@ -273,7 +286,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(348, 25);
+            this.label3.Location = new System.Drawing.Point(351, 64);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(28, 15);
             this.label3.TabIndex = 18;
@@ -283,7 +296,7 @@
             // 
             this.label2.AccessibleDescription = "test";
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(189, 25);
+            this.label2.Location = new System.Drawing.Point(192, 64);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(110, 15);
             this.label2.TabIndex = 17;
@@ -292,7 +305,7 @@
             // 
             // LinienAbbruchZeitUpDownControl
             // 
-            this.LinienAbbruchZeitUpDownControl.Location = new System.Drawing.Point(303, 23);
+            this.LinienAbbruchZeitUpDownControl.Location = new System.Drawing.Point(306, 62);
             this.LinienAbbruchZeitUpDownControl.Name = "LinienAbbruchZeitUpDownControl";
             this.LinienAbbruchZeitUpDownControl.Size = new System.Drawing.Size(39, 23);
             this.LinienAbbruchZeitUpDownControl.TabIndex = 16;
@@ -461,7 +474,6 @@
         private GroupBox groupBox1;
         private Button button_previousstop;
         private Button button_nextstop;
-        private Button button_reset;
         private Button button_switchline;
         private Button button_switchmode;
         private Label versionlabel;
@@ -475,6 +487,8 @@
         private CheckBox currentTimeStopOnLineChange;
         private Label label4;
         private CheckBox autoSwitchAfterFirst;
+        private Label timeToNextStop;
+        private CheckBox invertLogoCheckbox;
     }
 }
 
