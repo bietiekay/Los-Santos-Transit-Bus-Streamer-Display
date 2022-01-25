@@ -39,11 +39,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.Lizenzen = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.HotkeysActive = new System.Windows.Forms.CheckBox();
             this.button_previousstop = new System.Windows.Forms.Button();
             this.button_nextstop = new System.Windows.Forms.Button();
             this.button_switchline = new System.Windows.Forms.Button();
             this.button_switchmode = new System.Windows.Forms.Button();
-            this.pbtHide = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.invertLogoCheckbox = new System.Windows.Forms.CheckBox();
             this.autoSwitchAfterFirst = new System.Windows.Forms.CheckBox();
@@ -61,6 +61,7 @@
             this.pbtDisplayLedOn = new System.Windows.Forms.Button();
             this.ledMatrixControl = new LedMatrixControlNamespace.LedMatrixControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.pbtHide = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -159,6 +160,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.HotkeysActive);
             this.groupBox1.Controls.Add(this.button_previousstop);
             this.groupBox1.Controls.Add(this.button_nextstop);
             this.groupBox1.Controls.Add(this.button_switchline);
@@ -170,9 +172,20 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Steuerung";
             // 
+            // HotkeysActive
+            // 
+            this.HotkeysActive.AutoSize = true;
+            this.HotkeysActive.Location = new System.Drawing.Point(6, 124);
+            this.HotkeysActive.Name = "HotkeysActive";
+            this.HotkeysActive.Size = new System.Drawing.Size(97, 19);
+            this.HotkeysActive.TabIndex = 5;
+            this.HotkeysActive.Text = "Hotkeys aktiv";
+            this.HotkeysActive.UseVisualStyleBackColor = true;
+            this.HotkeysActive.CheckedChanged += new System.EventHandler(this.HotkeysActive_CheckedChanged);
+            // 
             // button_previousstop
             // 
-            this.button_previousstop.Location = new System.Drawing.Point(6, 85);
+            this.button_previousstop.Location = new System.Drawing.Point(6, 73);
             this.button_previousstop.Name = "button_previousstop";
             this.button_previousstop.Size = new System.Drawing.Size(141, 23);
             this.button_previousstop.TabIndex = 4;
@@ -182,7 +195,7 @@
             // 
             // button_nextstop
             // 
-            this.button_nextstop.Location = new System.Drawing.Point(6, 114);
+            this.button_nextstop.Location = new System.Drawing.Point(6, 95);
             this.button_nextstop.Name = "button_nextstop";
             this.button_nextstop.Size = new System.Drawing.Size(141, 23);
             this.button_nextstop.TabIndex = 3;
@@ -192,7 +205,7 @@
             // 
             // button_switchline
             // 
-            this.button_switchline.Location = new System.Drawing.Point(6, 56);
+            this.button_switchline.Location = new System.Drawing.Point(6, 48);
             this.button_switchline.Name = "button_switchline";
             this.button_switchline.Size = new System.Drawing.Size(141, 23);
             this.button_switchline.TabIndex = 1;
@@ -209,17 +222,6 @@
             this.button_switchmode.Text = "Modus wechseln";
             this.button_switchmode.UseVisualStyleBackColor = true;
             this.button_switchmode.Click += new System.EventHandler(this.button_switchmode_Click);
-            // 
-            // pbtHide
-            // 
-            this.pbtHide.Location = new System.Drawing.Point(4, 7);
-            this.pbtHide.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.pbtHide.Name = "pbtHide";
-            this.pbtHide.Size = new System.Drawing.Size(88, 27);
-            this.pbtHide.TabIndex = 5;
-            this.pbtHide.Text = "Einklappen";
-            this.pbtHide.UseVisualStyleBackColor = true;
-            this.pbtHide.Click += new System.EventHandler(this.bptHide_Click);
             // 
             // groupBox2
             // 
@@ -427,9 +429,16 @@
             this.ledMatrixControl.TabIndex = 2;
             this.ledMatrixControl.Text = "ledMatrixControl";
             // 
-            // toolTip1
+            // pbtHide
             // 
-            this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
+            this.pbtHide.Location = new System.Drawing.Point(4, 7);
+            this.pbtHide.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.pbtHide.Name = "pbtHide";
+            this.pbtHide.Size = new System.Drawing.Size(88, 27);
+            this.pbtHide.TabIndex = 5;
+            this.pbtHide.Text = "Einklappen";
+            this.pbtHide.UseVisualStyleBackColor = true;
+            this.pbtHide.Click += new System.EventHandler(this.bptHide_Click);
             // 
             // DisplayForm
             // 
@@ -449,6 +458,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LinienAbbruchZeitUpDownControl)).EndInit();
@@ -489,6 +499,7 @@
         private CheckBox autoSwitchAfterFirst;
         private Label timeToNextStop;
         private CheckBox invertLogoCheckbox;
+        private CheckBox HotkeysActive;
     }
 }
 

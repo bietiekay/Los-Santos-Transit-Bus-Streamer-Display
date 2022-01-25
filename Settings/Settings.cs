@@ -51,6 +51,7 @@ namespace LST_Busline.Settings
     public class Line
     {
         public string name { get; set; }
+        public bool isInformationOnly { get; set; } = false;
         public List<Stop> stops { get; set; }
     }
 

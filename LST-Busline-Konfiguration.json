@@ -1,5 +1,8 @@
 {
   "settings": {
+    "lineabortwindow": 5,
+    "autosuggeststoponlinechange": false,
+    "autoforwardlineafterfirst": false,
     "hotkeys": {
       "nextstop": 57,
       "previousstop": 56,
@@ -10,10 +13,15 @@
     "style": {
       "led_on_color": -256,
       "led_off_color": -12566464,
-      "led_size_coefficient": 0.80,
+      "led_size_coefficient": 0.8,
       "lines": 17,
       "rows": 200,
-      "ledtype": 0
+      "ledtype": 0,
+      "windowposition_x": -1,
+      "windowposition_y": -1,
+      "windowheight": 545,
+      "windowwidth": 1274,
+      "logoinverted": false
     }
   },
   "modes": [
@@ -22,6 +30,7 @@
       "lines": [
         {
           "name": "City 1",
+          "isInformationOnly": false,
           "stops": [
             {
               "name": "ZOB",
@@ -195,6 +204,7 @@
         },
         {
           "name": "City 2",
+          "isInformationOnly": false,
           "stops": [
             {
               "name": "ZOB",
@@ -368,6 +378,7 @@
         },
         {
           "name": "Nord 1",
+          "isInformationOnly": false,
           "stops": [
             {
               "name": "ZOB",
@@ -464,6 +475,7 @@
         },
         {
           "name": "Nord 2",
+          "isInformationOnly": false,
           "stops": [
             {
               "name": "ZOB",
@@ -565,6 +577,7 @@
       "lines": [
         {
           "name": "Los Santos Transit",
+          "isInformationOnly": true,
           "stops": [
             {
               "name": "AUßER DIENST",

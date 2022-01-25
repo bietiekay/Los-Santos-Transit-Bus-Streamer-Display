@@ -135,6 +135,7 @@ namespace LSTBusline
             ledMatrixControl.LedOffColor = Color.FromArgb(Konfiguration?.settings?.style?.led_off_color ?? -12566464);
             ledMatrixControl.SizeCoeff = (double)Konfiguration.settings.style.led_size_coefficient;
 
+            HotkeysActive.Checked = true;
 
             invertLogoCheckbox.Checked = Konfiguration.settings.style.logoinverted;
             currentTimeStopOnLineChange.Checked = Konfiguration.settings.autosuggeststoponlinechange;
@@ -464,10 +465,33 @@ namespace LSTBusline
             }
         }
 
+        private bool IsCurrentlineLineInformationOnly()
+        {
+            /*int stoptime = int.MinValue;
+            // Prüft ob alle Halts in der Linie identische Zeiten haben
+
+            // alle stops
+            for (int stop=0;stop <= Konfiguration.modes[currentMode].lines[currentLine].stops.Count() -1; stop++)
+            {
+                // alle haltezeiten dieses stops
+                foreach (int thisstoptime in Konfiguration.modes[currentMode].lines[currentLine].stops[stop].leavetimes_hourly)
+                {
+                    if (stoptime == int.MinValue)
+                        stoptime = thisstoptime;
+
+                    if (stoptime != thisstoptime)
+                        return false;
+                }
+            }
+            return true;*/
+            return Konfiguration.modes[currentMode].lines[currentLine].isInformationOnly;
+        }
+
         private void AutoForward(object sender, EventArgs e)
         {            
-            if ((Konfiguration.settings.autoforwardlineafterfirst) && currentStop > 0)
+            if ((Konfiguration.settings.autoforwardlineafterfirst) && currentStop > 0 && !IsCurrentlineLineInformationOnly())
             {
+
                 //Debug.WriteLine("AutoForward");
                 // auto forward...
                 int tempstop = 0;
@@ -497,7 +521,8 @@ namespace LSTBusline
         private void ReRegisterHotkeys(object sender, EventArgs e)
         {
             //Debug.WriteLine("Hotkeys re-register");
-            RegisterHotkeys(_kManager);
+            if (HotkeysActive.Checked)            
+                RegisterHotkeys(_kManager);
         }
 
         /// <summary>
@@ -565,7 +590,10 @@ namespace LSTBusline
 
         public String GenerateNextSelectedStopTime()
         {
-            return "¦¦¦ :" + GenerateNextStopTime(currentMode, currentLine, currentStop, false).Minute.ToString("D2");
+            if (IsCurrentlineLineInformationOnly())
+                return "";
+            else
+                return "¦¦¦ :" + GenerateNextStopTime(currentMode, currentLine, currentStop, false).Minute.ToString("D2");
         }
 
         public DateTime GenerateNextStopTime(int mode, int line, int stop, bool ignoreAbortWindow)
@@ -723,7 +751,7 @@ namespace LSTBusline
                 groupBox2.Visible = true;
                 groupBox1.Visible = true;
                 pbtHide.Text = "Einklappen";
-                panel1.Height = 147;
+                panel1.Height = 170;
                 m_bIsHide = false;
             }
 
@@ -740,6 +768,7 @@ namespace LSTBusline
 
         #endregion
 
+        #region Kurzwahltasten
         private void button_switchmode_Click(object sender, EventArgs e)
         {
             HandleHotKey_ModeChange();
@@ -770,16 +799,13 @@ namespace LSTBusline
             var myForm = new ReleaseNotesCopyrightsAndLicenses();
             myForm.Show();
         }
+        #endregion
 
+        #region Einstellungen
         private void LinienAbbruchZeitUpDownControl_ValueChanged(object sender, EventArgs e)
         {
             Konfiguration.settings.lineabortwindow = Convert.ToInt32(LinienAbbruchZeitUpDownControl.Value);
             WriteConfiguration(Konfiguration);
-        }
-
-        private void toolTip1_Popup(object sender, PopupEventArgs e)
-        {
-
         }
 
         private void currentTimeStopOnLineChange_CheckedChanged(object sender, EventArgs e)
@@ -803,6 +829,15 @@ namespace LSTBusline
             Konfiguration.settings.style.logoinverted = invertLogoCheckbox.Checked;
             ledMatrixControl.SetItemText(idLogo, GenerateLogo());
             WriteConfiguration(Konfiguration);
+        }
+        #endregion
+
+        private void HotkeysActive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!HotkeysActive.Checked)
+            {
+                _kManager.UnregisterAll();
+            }
         }
     }
 }
