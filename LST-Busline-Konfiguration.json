@@ -187,17 +187,10 @@
               ]
             },
             {
-              "name": "Mirrorpark",
+              "name": "Mirror Park",
               "leavetimes_hourly": [
                 22,
                 52
-              ]
-            },
-            {
-              "name": "P.H. Medical Center",
-              "leavetimes_hourly": [
-                23,
-                53
               ]
             }
           ]
@@ -221,14 +214,7 @@
               ]
             },
             {
-              "name": "P.H. Medical Center",
-              "leavetimes_hourly": [
-                1,
-                31
-              ]
-            },
-            {
-              "name": "Mirrorpark",
+              "name": "Mirror Park",
               "leavetimes_hourly": [
                 3,
                 33
@@ -564,8 +550,8 @@
             {
               "name": "Alta",
               "leavetimes_hourly": [
-                24,
-                54
+                23,
+                53
               ]
             }
           ]
