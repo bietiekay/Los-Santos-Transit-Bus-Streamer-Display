@@ -21,6 +21,7 @@ namespace LST_Busline.Settings
     {
         public int led_on_color { get; set; } = -256;
         public int led_off_color { get; set; } = -12566464;
+        public int led_background_color { get; set; } = -16777216;
         public double led_size_coefficient { get; set; } = 0.8;
         public int lines { get; set; } = 17;
         public int rows { get; set; } = 200;

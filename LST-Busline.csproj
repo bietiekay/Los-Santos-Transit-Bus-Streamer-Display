@@ -15,12 +15,14 @@
     <Copyright>(C) Daniel Kirstenpfad / bietiekay 2022</Copyright>
     <PackageIcon>LST-Logo.png</PackageIcon>
     <DebugType>embedded</DebugType>
-    <AssemblyVersion>1.11</AssemblyVersion>
-    <FileVersion>1.11</FileVersion>
-    <Version>1.11</Version>
+    <AssemblyVersion>1.12</AssemblyVersion>
+    <FileVersion>1.12</FileVersion>
+    <Version>1.12</Version>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="LST-Busline-Font.xml" />
+    <None Remove="LST-Busline-Konfiguration.json" />
     <None Remove="update.xml" />
   </ItemGroup>
 
@@ -29,6 +31,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="LST-Busline-Font.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LST-Busline-Konfiguration.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="update.xml" />
   </ItemGroup>
 
@@ -44,12 +52,6 @@
     <None Update="Assets\LST-Logo.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
-    </None>
-    <None Update="LST-Busline-Font.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="LST-Busline-Konfiguration.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="LST-Logo.png">
       <Pack>True</Pack>

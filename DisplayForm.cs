@@ -131,41 +131,13 @@ namespace LSTBusline
             var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             versionlabel.Text = String.Format("{0}", version);
 
-            ledMatrixControl.LedOnColor = Color.FromArgb(Konfiguration?.settings?.style?.led_on_color ?? -256);
-            ledMatrixControl.LedOffColor = Color.FromArgb(Konfiguration?.settings?.style?.led_off_color ?? -12566464);
-            ledMatrixControl.SizeCoeff = (double)Konfiguration.settings.style.led_size_coefficient;
+            InitializeAllElements();
 
             HotkeysActive.Checked = true;
 
-            invertLogoCheckbox.Checked = Konfiguration.settings.style.logoinverted;
-            currentTimeStopOnLineChange.Checked = Konfiguration.settings.autosuggeststoponlinechange;
-            autoSwitchAfterFirst.Checked = Konfiguration.settings.autoforwardlineafterfirst;
-            if (autoSwitchAfterFirst.Checked)
-                LinienAbbruchZeitUpDownControl.Enabled = false;
-            else
-                LinienAbbruchZeitUpDownControl.Enabled = true;
-            if (Konfiguration.settings.style?.ledtype == 0)
-            {
-                ledMatrixControl.SetLedStyle(LedSyle.Round);
-                cbxDisplayLedStyle.SelectedIndex = 0;
-            }                
-            else
-            {
-                ledMatrixControl.SetLedStyle(LedSyle.Square);
-                cbxDisplayLedStyle.SelectedIndex = 1;
-            }
-
-            // Get the color from the control
-            pbtDisplayLedOn.BackColor = ledMatrixControl.LedOnColor;
-            pbtDisplayLedOff.BackColor = ledMatrixControl.LedOffColor;
-
-
-            // Get the size from the control
-            ledMatrixControl.SetMatrixSize(Konfiguration.settings?.style?.lines ?? 200, Konfiguration.settings?.style?.rows ?? 17);
-            nudLedSize.Value = (decimal)ledMatrixControl.SizeCoeff;
-
             // Set the font collection
             ledMatrixControl.LoadFontCollectionFromResource("LST-Busline-Font.xml");
+            nudLedSize.Value = (decimal)ledMatrixControl.SizeCoeff;
 
             // Add the text item to the conrol
             //idLogo = ledMatrixControl.AddTextItem(tbxTx1.Text, new Point(0, 0), ItemDirection.Right, ItemSpeed.Idle);
@@ -176,8 +148,6 @@ namespace LSTBusline
             idText_Line1 = ledMatrixControl.AddTextItem(GenerateLine1(), new Point(25, 0), ItemDirection.Right, ItemSpeed.Idle);
             idText_Line2 = ledMatrixControl.AddTextItem(GenerateLine2(), new Point(25, 8), ItemDirection.Right, ItemSpeed.Idle);
 
-            // Line Abort Window
-            LinienAbbruchZeitUpDownControl.Value = Konfiguration.settings.lineabortwindow;
 
             // Init the flags
             m_bIsOn = false;
@@ -194,6 +164,46 @@ namespace LSTBusline
             var updater = new UpdaterService.Diagnostics.Update.Updater(StartUpAndUpdate.ReadResourceHelper.ReadResource("update.xml"));
             updater.StartMonitoring();
             HandleHotKey_Reset();
+        }
+
+        private void InitializeAllElements()
+        {
+            ledMatrixControl.LedOnColor = Color.FromArgb(Konfiguration?.settings?.style?.led_on_color ?? -256);
+            ledMatrixControl.LedOffColor = Color.FromArgb(Konfiguration?.settings?.style?.led_off_color ?? -12566464);
+            ledMatrixControl.BackColor = Color.FromArgb(Konfiguration?.settings?.style?.led_background_color ?? -16777216);
+            ledMatrixControl.SizeCoeff = (double)Konfiguration.settings.style.led_size_coefficient;
+            invertLogoCheckbox.Checked = Konfiguration.settings.style.logoinverted;
+            currentTimeStopOnLineChange.Checked = Konfiguration.settings.autosuggeststoponlinechange;
+            autoSwitchAfterFirst.Checked = Konfiguration.settings.autoforwardlineafterfirst;
+            if (autoSwitchAfterFirst.Checked)
+                LinienAbbruchZeitUpDownControl.Enabled = false;
+            else
+                LinienAbbruchZeitUpDownControl.Enabled = true;
+            if (Konfiguration.settings.style?.ledtype == 0)
+            {
+                ledMatrixControl.SetLedStyle(LedSyle.Round);
+                cbxDisplayLedStyle.SelectedIndex = 0;
+            }
+            else
+            {
+                ledMatrixControl.SetLedStyle(LedSyle.Square);
+                cbxDisplayLedStyle.SelectedIndex = 1;
+            }
+
+            // Get the color from the control
+            pbtDisplayLedOn.BackColor = ledMatrixControl.LedOnColor;
+            pbtDisplayLedOff.BackColor = ledMatrixControl.LedOffColor;
+            pbtLEDBackgroundButton.BackColor = ledMatrixControl.BackColor;
+
+
+            // Get the size from the control
+            ledMatrixControl.SetMatrixSize(Konfiguration.settings?.style?.lines ?? 200, Konfiguration.settings?.style?.rows ?? 17);
+
+
+
+            // Line Abort Window
+            LinienAbbruchZeitUpDownControl.Value = Konfiguration.settings.lineabortwindow;
+
         }
 
         #region Konfiguration
@@ -714,10 +724,24 @@ namespace LSTBusline
             {
                 pbtDisplayLedOn.BackColor = cdLedOnColorDlg.Color;
                 ledMatrixControl.LedOnColor = cdLedOnColorDlg.Color;
+                Konfiguration.settings.style.led_on_color = cdLedOnColorDlg.Color.ToArgb();
+                WriteConfiguration(Konfiguration);
             }
-            Konfiguration.settings.style.led_on_color = cdLedOnColorDlg.Color.ToArgb();
-            WriteConfiguration(Konfiguration);
+            
 
+        }
+
+        private void pbtLEDBackgroundButton_Click(object sender, EventArgs e)
+        {
+            ColorDialog cdLedOnColorDlg = new ColorDialog();
+
+            if (cdLedOnColorDlg.ShowDialog() == DialogResult.OK)
+            {
+                pbtLEDBackgroundButton.BackColor = cdLedOnColorDlg.Color;
+                ledMatrixControl.BackColor = cdLedOnColorDlg.Color;
+                Konfiguration.settings.style.led_background_color = cdLedOnColorDlg.Color.ToArgb();
+                WriteConfiguration(Konfiguration);
+            }
         }
 
         private void pbtDisplayLedOff_Click(object sender, EventArgs e)
@@ -728,10 +752,9 @@ namespace LSTBusline
             {
                 pbtDisplayLedOff.BackColor = cdLedOffColorDlg.Color;
                 ledMatrixControl.LedOffColor = cdLedOffColorDlg.Color;
+                Konfiguration.settings.style.led_off_color = cdLedOffColorDlg.Color.ToArgb();
+                WriteConfiguration(Konfiguration);
             }
-            Konfiguration.settings.style.led_off_color = cdLedOffColorDlg.Color.ToArgb();
-            WriteConfiguration(Konfiguration);
-
         }
 
         private void bptHide_Click(object sender, EventArgs e)
@@ -837,6 +860,33 @@ namespace LSTBusline
             if (!HotkeysActive.Checked)
             {
                 _kManager.UnregisterAll();
+            }
+        }
+
+        private void ResetConfiguration_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Soll die Konfiguration wirklich neu geladen und auf Lieferzustand zurückgesetzt werden? Damit werden auch alle Linien zurückgesetzt.", "Konfiguration auf Lieferzustand zurücksetzen", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                if (File.Exists("LST-Busline-Konfiguration.bak"))
+                    File.Delete("LST-Busline-Konfiguration.bak");
+
+                // backup machen
+                File.Move("LST-Busline-Konfiguration.json", "LST-Busline-Konfiguration.bak");
+
+                var konfiguration = StartUpAndUpdate.ReadResourceHelper.ReadResource("LST-Busline-Konfiguration.json");
+
+                File.WriteAllText("LST-Busline-Konfiguration.json", konfiguration);
+
+                // neu einlesen
+                Konfiguration = ReadConfiguration();
+                WriteConfiguration(Konfiguration);
+                InitializeAllElements();
+
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
             }
         }
     }

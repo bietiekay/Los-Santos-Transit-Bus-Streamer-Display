@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DisplayForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ResetConfiguration = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.timeToNextStop = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -44,7 +45,10 @@
             this.button_nextstop = new System.Windows.Forms.Button();
             this.button_switchline = new System.Windows.Forms.Button();
             this.button_switchmode = new System.Windows.Forms.Button();
+            this.pbtHide = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.pbtLEDBackgroundButton = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
             this.invertLogoCheckbox = new System.Windows.Forms.CheckBox();
             this.autoSwitchAfterFirst = new System.Windows.Forms.CheckBox();
             this.currentTimeStopOnLineChange = new System.Windows.Forms.CheckBox();
@@ -61,7 +65,6 @@
             this.pbtDisplayLedOn = new System.Windows.Forms.Button();
             this.ledMatrixControl = new LedMatrixControlNamespace.LedMatrixControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.pbtHide = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -72,6 +75,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.ResetConfiguration);
             this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.pbtHide);
@@ -83,6 +87,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1258, 170);
             this.panel1.TabIndex = 5;
+            // 
+            // ResetConfiguration
+            // 
+            this.ResetConfiguration.Location = new System.Drawing.Point(4, 116);
+            this.ResetConfiguration.Name = "ResetConfiguration";
+            this.ResetConfiguration.Size = new System.Drawing.Size(88, 47);
+            this.ResetConfiguration.TabIndex = 12;
+            this.ResetConfiguration.Text = "Konfiguration resetten";
+            this.ResetConfiguration.UseVisualStyleBackColor = true;
+            this.ResetConfiguration.Click += new System.EventHandler(this.ResetConfiguration_Click);
             // 
             // groupBox3
             // 
@@ -223,8 +237,21 @@
             this.button_switchmode.UseVisualStyleBackColor = true;
             this.button_switchmode.Click += new System.EventHandler(this.button_switchmode_Click);
             // 
+            // pbtHide
+            // 
+            this.pbtHide.Location = new System.Drawing.Point(4, 7);
+            this.pbtHide.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.pbtHide.Name = "pbtHide";
+            this.pbtHide.Size = new System.Drawing.Size(88, 27);
+            this.pbtHide.TabIndex = 5;
+            this.pbtHide.Text = "Einklappen";
+            this.pbtHide.UseVisualStyleBackColor = true;
+            this.pbtHide.Click += new System.EventHandler(this.bptHide_Click);
+            // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.pbtLEDBackgroundButton);
+            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.invertLogoCheckbox);
             this.groupBox2.Controls.Add(this.autoSwitchAfterFirst);
             this.groupBox2.Controls.Add(this.currentTimeStopOnLineChange);
@@ -248,10 +275,30 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "LED und Linien Einstellungen";
             // 
+            // pbtLEDBackgroundButton
+            // 
+            this.pbtLEDBackgroundButton.Location = new System.Drawing.Point(273, 19);
+            this.pbtLEDBackgroundButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.pbtLEDBackgroundButton.Name = "pbtLEDBackgroundButton";
+            this.pbtLEDBackgroundButton.Size = new System.Drawing.Size(88, 27);
+            this.pbtLEDBackgroundButton.TabIndex = 23;
+            this.pbtLEDBackgroundButton.UseVisualStyleBackColor = true;
+            this.pbtLEDBackgroundButton.Click += new System.EventHandler(this.pbtLEDBackgroundButton_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(190, 25);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(75, 15);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "Hintergrund:";
+            // 
             // invertLogoCheckbox
             // 
             this.invertLogoCheckbox.AutoSize = true;
-            this.invertLogoCheckbox.Location = new System.Drawing.Point(189, 25);
+            this.invertLogoCheckbox.Location = new System.Drawing.Point(376, 25);
             this.invertLogoCheckbox.Name = "invertLogoCheckbox";
             this.invertLogoCheckbox.Size = new System.Drawing.Size(168, 19);
             this.invertLogoCheckbox.TabIndex = 21;
@@ -429,17 +476,6 @@
             this.ledMatrixControl.TabIndex = 2;
             this.ledMatrixControl.Text = "ledMatrixControl";
             // 
-            // pbtHide
-            // 
-            this.pbtHide.Location = new System.Drawing.Point(4, 7);
-            this.pbtHide.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.pbtHide.Name = "pbtHide";
-            this.pbtHide.Size = new System.Drawing.Size(88, 27);
-            this.pbtHide.TabIndex = 5;
-            this.pbtHide.Text = "Einklappen";
-            this.pbtHide.UseVisualStyleBackColor = true;
-            this.pbtHide.Click += new System.EventHandler(this.bptHide_Click);
-            // 
             // DisplayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -500,6 +536,9 @@
         private Label timeToNextStop;
         private CheckBox invertLogoCheckbox;
         private CheckBox HotkeysActive;
+        private Label label7;
+        private Button pbtLEDBackgroundButton;
+        private Button ResetConfiguration;
     }
 }
 
