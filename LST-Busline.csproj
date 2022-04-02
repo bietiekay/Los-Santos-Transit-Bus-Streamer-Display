@@ -15,8 +15,8 @@
     <Copyright>(C) Daniel Kirstenpfad / bietiekay 2022</Copyright>
     <PackageIcon>LST-Logo.png</PackageIcon>
     <DebugType>embedded</DebugType>
-    <AssemblyVersion>1.12</AssemblyVersion>
-    <FileVersion>1.12</FileVersion>
+    <AssemblyVersion>1.13</AssemblyVersion>
+    <FileVersion>1.13</FileVersion>
     <Version>1.12</Version>
   </PropertyGroup>
 
