@@ -47,7 +47,14 @@
               ]
             },
             {
-              "name": "La Mesa",
+              "name": "Strawberry",
+              "leavetimes_hourly": [
+                1,
+                31
+              ]
+            },
+            {
+              "name": "Davis",
               "leavetimes_hourly": [
                 2,
                 32
@@ -103,98 +110,112 @@
               ]
             },
             {
-              "name": "Little Seoul",
+              "name": "Vespucci Beach",
               "leavetimes_hourly": [
                 11,
                 41
               ]
             },
             {
-              "name": "Vespucci Beach",
+              "name": "Vespucci Kanäle",
               "leavetimes_hourly": [
                 12,
                 42
               ]
             },
             {
-              "name": "Vespucci Kanäle",
+              "name": "Little Seoul",
               "leavetimes_hourly": [
                 13,
                 43
               ]
             },
             {
-              "name": "Rockford Hills",
+              "name": "Downtown",
               "leavetimes_hourly": [
                 14,
                 44
               ]
             },
             {
-              "name": "Dept. of Labor",
+              "name": "Alta",
               "leavetimes_hourly": [
                 15,
                 45
               ]
             },
             {
-              "name": "Del Perro",
+              "name": "Burton",
               "leavetimes_hourly": [
                 16,
                 46
               ]
             },
             {
+              "name": "Rockford Hills",
+              "leavetimes_hourly": [
+                16,
+                46
+              ]
+            },
+            {
+              "name": "City Administration",
+              "leavetimes_hourly": [
+                17,
+                47
+              ]
+            },
+            {
+              "name": "Del Perro",
+              "leavetimes_hourly": [
+                17,
+                47
+              ]
+            },
+            {
               "name": "Morningwood",
-              "leavetimes_hourly": [
-                17,
-                47
-              ]
-            },
-            {
-              "name": "Richman",
-              "leavetimes_hourly": [
-                17,
-                47
-              ]
-            },
-            {
-              "name": "Vinewood Hills",
               "leavetimes_hourly": [
                 18,
                 48
               ]
             },
             {
-              "name": "Vinewood West",
+              "name": "Universität",
               "leavetimes_hourly": [
                 19,
                 49
               ]
             },
             {
-              "name": "Alta",
+              "name": "Vinewood Hills",
               "leavetimes_hourly": [
                 20,
                 50
               ]
             },
             {
-              "name": "Vinewood Ost",
+              "name": "Vinewood West",
               "leavetimes_hourly": [
                 21,
                 51
               ]
             },
             {
-              "name": "Mirrorpark",
+              "name": "Vinewood Boulevard",
+              "leavetimes_hourly": [
+                21,
+                51
+              ]
+            },
+            {
+              "name": "Vinewood Ost",
               "leavetimes_hourly": [
                 22,
                 52
               ]
             },
             {
-              "name": "P.H. Medical Center",
+              "name": "Mirror Park",
               "leavetimes_hourly": [
                 23,
                 53
@@ -221,17 +242,10 @@
               ]
             },
             {
-              "name": "P.H. Medical Center",
+              "name": "Mirror Park",
               "leavetimes_hourly": [
-                1,
-                31
-              ]
-            },
-            {
-              "name": "Mirrorpark",
-              "leavetimes_hourly": [
-                3,
-                33
+                2,
+                32
               ]
             },
             {
@@ -242,70 +256,77 @@
               ]
             },
             {
-              "name": "Alta",
+              "name": "Vinewood Boulevard",
+              "leavetimes_hourly": [
+                3,
+                33
+              ]
+            },
+            {
+              "name": "Vinewood West",
               "leavetimes_hourly": [
                 4,
                 34
               ]
             },
             {
-              "name": "Vinewood West",
+              "name": "Vinewood Hills",
+              "leavetimes_hourly": [
+                4,
+                34
+              ]
+            },
+            {
+              "name": "Universität",
               "leavetimes_hourly": [
                 5,
                 35
               ]
             },
             {
-              "name": "Vinewood Hills",
+              "name": "Morningwood",
               "leavetimes_hourly": [
                 6,
                 36
               ]
             },
             {
-              "name": "Richman",
-              "leavetimes_hourly": [
-                7,
-                37
-              ]
-            },
-            {
-              "name": "Morningwood",
-              "leavetimes_hourly": [
-                7,
-                37
-              ]
-            },
-            {
               "name": "Del Perro",
+              "leavetimes_hourly": [
+                7,
+                37
+              ]
+            },
+            {
+              "name": "City Administration",
+              "leavetimes_hourly": [
+                7,
+                37
+              ]
+            },
+            {
+              "name": "Rockford Hills",
               "leavetimes_hourly": [
                 8,
                 38
               ]
             },
             {
-              "name": "Dept. of Labor",
+              "name": "Burton",
               "leavetimes_hourly": [
                 9,
                 39
               ]
             },
             {
-              "name": "Rockford Hills",
+              "name": "Alta",
               "leavetimes_hourly": [
                 10,
                 40
               ]
             },
             {
-              "name": "Vespucci Kanäle",
-              "leavetimes_hourly": [
-                11,
-                41
-              ]
-            },
-            {
-              "name": "Vespucci Beach",
+              "name": "Downtown",
               "leavetimes_hourly": [
                 11,
                 41
@@ -313,6 +334,20 @@
             },
             {
               "name": "Little Seoul",
+              "leavetimes_hourly": [
+                12,
+                42
+              ]
+            },
+            {
+              "name": "Vespucci Kanäle",
+              "leavetimes_hourly": [
+                12,
+                42
+              ]
+            },
+            {
+              "name": "Vespucci Beach",
               "leavetimes_hourly": [
                 13,
                 43
@@ -368,7 +403,14 @@
               ]
             },
             {
-              "name": "La Mesa",
+              "name": "Davis",
+              "leavetimes_hourly": [
+                23,
+                53
+              ]
+            },
+            {
+              "name": "Strawberry",
               "leavetimes_hourly": [
                 23,
                 53
@@ -416,14 +458,7 @@
               ]
             },
             {
-              "name": "Yellow Jack Inn",
-              "leavetimes_hourly": [
-                7,
-                37
-              ]
-            },
-            {
-              "name": "Sandy Shores Airfield",
+              "name": "Grand Senora Desert",
               "leavetimes_hourly": [
                 7,
                 37
@@ -437,7 +472,7 @@
               ]
             },
             {
-              "name": "Grapeseed",
+              "name": "Grapeseed Farms",
               "leavetimes_hourly": [
                 11,
                 41
@@ -458,10 +493,17 @@
               ]
             },
             {
-              "name": "Chumash",
+              "name": "Chumash Nord",
               "leavetimes_hourly": [
                 20,
                 50
+              ]
+            },
+            {
+              "name": "Chumash Süd",
+              "leavetimes_hourly": [
+                21,
+                51
               ]
             },
             {
@@ -499,7 +541,14 @@
               ]
             },
             {
-              "name": "Chumash",
+              "name": "Chumash Süd",
+              "leavetimes_hourly": [
+                4,
+                34
+              ]
+            },
+            {
+              "name": "Chumash Nord",
               "leavetimes_hourly": [
                 5,
                 35
@@ -515,36 +564,29 @@
             {
               "name": "Paleto Bay Nord",
               "leavetimes_hourly": [
-                10,
-                40
+                12,
+                42
               ]
             },
             {
-              "name": "Grapeseed",
+              "name": "Grapeseed Farms",
               "leavetimes_hourly": [
-                14,
-                44
+                15,
+                45
               ]
             },
             {
               "name": "Sandy Shores",
               "leavetimes_hourly": [
-                16,
-                46
-              ]
-            },
-            {
-              "name": "Sandy Shores Airfield",
-              "leavetimes_hourly": [
                 17,
                 47
               ]
             },
             {
-              "name": "Yellow Jack Inn",
+              "name": "Grand Senora Desert",
               "leavetimes_hourly": [
-                17,
-                47
+                18,
+                48
               ]
             },
             {
@@ -564,8 +606,8 @@
             {
               "name": "Alta",
               "leavetimes_hourly": [
-                24,
-                54
+                23,
+                53
               ]
             }
           ]
