@@ -12,12 +12,12 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <SignAssembly>False</SignAssembly>
     <Authors>Daniel Kirstenpfad</Authors>
-    <Copyright>(C) Daniel Kirstenpfad / bietiekay 2022</Copyright>
+    <Copyright>(C) Daniel Kirstenpfad / bietiekay 2023</Copyright>
     <PackageIcon>LST-Logo.png</PackageIcon>
     <DebugType>embedded</DebugType>
-    <AssemblyVersion>1.13</AssemblyVersion>
-    <FileVersion>1.13</FileVersion>
-    <Version>1.12</Version>
+    <AssemblyVersion>1.14</AssemblyVersion>
+    <FileVersion>1.14</FileVersion>
+    <Version>1.14</Version>
   </PropertyGroup>
 
   <ItemGroup>
