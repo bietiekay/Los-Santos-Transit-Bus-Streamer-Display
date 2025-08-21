@@ -80,7 +80,7 @@ namespace LSTBusline
         int idLogo;
         int idCurrentTime;
         int idNextStopTime;
-        bool even_or_uneven = false; // Hilfsvariable um regelmässig zwischen zwei Zuständen hin und her zu schalten
+        bool even_or_uneven = false; // Hilfsvariable um regelmÃ¤ssig zwischen zwei ZustÃ¤nden hin und her zu schalten
         DateTime lastrun = DateTime.Now;
         bool m_bIsOn;   
         bool m_bIsHide;
@@ -245,7 +245,7 @@ namespace LSTBusline
 
             #region register hotkeys
             //Boolean NextStop        = RegisterHotKey(this.Handle, 1, 0x0000, Konfiguration.settings.hotkeys.nextstop);
-            //    if (!NextStop) { MessageBox.Show("Nächster Halt Hotkey konnte nicht aktiviert werden!"); }
+            //    if (!NextStop) { MessageBox.Show("NÃ¤chster Halt Hotkey konnte nicht aktiviert werden!"); }
             //Boolean PreviousStop    = RegisterHotKey(this.Handle, 2, 0x0000, Konfiguration.settings.hotkeys.previousstop);
             //    if (!PreviousStop) { MessageBox.Show("Vorheriger Halt Hotkey konnte nicht aktiviert werden!"); }
             //Boolean ResetLine       = RegisterHotKey(this.Handle, 3, 0x0000, Konfiguration.settings.hotkeys.resetline);
@@ -258,7 +258,7 @@ namespace LSTBusline
             kManager.Start();
             kManager.UnregisterAll();
 
-            // Nächster Halt
+            // NÃ¤chster Halt
             kManager.RegisterHotkey(Konfiguration.settings.hotkeys?.nextstop ?? (int)Keys.D9, () =>
             {
                 HandleHotKey_NextStop();
@@ -292,17 +292,17 @@ namespace LSTBusline
         #region Hotkeys behandeln und reagieren
         protected void HandleHotKey_NextStop()
         {
-            Debug.WriteLine("Nächster Halt");            
+            Debug.WriteLine("NÃ¤chster Halt");            
             lock (lockObject)
             {
                 if ((currentStop + 1) > Konfiguration.modes[currentMode].lines[currentLine].stops.Count() - 1)
                 {
-                    // hochzählen geht nicht, wir fangen bei 0 an
+                    // hochzÃ¤hlen geht nicht, wir fangen bei 0 an
                     currentStop = 0;
                 }
                 else
                 {
-                    // eins hochzählen
+                    // eins hochzÃ¤hlen
                     currentStop += 1;
                 }
             }
@@ -315,12 +315,12 @@ namespace LSTBusline
             {
                 if ((currentStop - 1) < 0)
                 {
-                    // runterzählen geht nicht, wir schalten auf den letzten Stop
+                    // runterzÃ¤hlen geht nicht, wir schalten auf den letzten Stop
                     currentStop = Konfiguration.modes[currentMode].lines[currentLine].stops.Count() - 1;
                 }
                 else
                 {
-                    // eins runterzählen
+                    // eins runterzÃ¤hlen
                     currentStop -= 1;
                 }
             }
@@ -347,12 +347,12 @@ namespace LSTBusline
             {
                 if ((currentLine + 1) > Konfiguration.modes[currentMode].lines.Count() - 1)
                 {
-                    // hochzählen geht nicht, wir fangen bei 0 an
+                    // hochzÃ¤hlen geht nicht, wir fangen bei 0 an
                     currentLine = 0;
                 }
                 else
                 {
-                    // eins hochzählen
+                    // eins hochzÃ¤hlen
                     currentLine += 1;
                 }
 
@@ -363,7 +363,7 @@ namespace LSTBusline
                 }
                 else
                 {
-                    // den richtigen Stop vorauswählen - das ist der nächstmögliche entsprechend der aktuellen Uhrzeit
+                    // den richtigen Stop vorauswÃ¤hlen - das ist der nÃ¤chstmÃ¶gliche entsprechend der aktuellen Uhrzeit
                     for (int i = 0; i <= Konfiguration.modes[currentMode].lines[currentLine].stops.Count() - 1; i++)
                     {
 
@@ -389,12 +389,12 @@ namespace LSTBusline
             {
                 if ((currentMode + 1) > Konfiguration.modes.Count() - 1)
                 {
-                    // hochzählen geht nicht, wir fangen bei 0 an
+                    // hochzÃ¤hlen geht nicht, wir fangen bei 0 an
                     currentMode = 0;
                 }
                 else
                 {
-                    // eins hochzählen
+                    // eins hochzÃ¤hlen
                     currentMode += 1;
                 }
 
@@ -437,7 +437,7 @@ namespace LSTBusline
             if ( (savedStatisticMode != currentMode) || (savedStatisticLine != currentLine) || (savedStatisticStop != currentStop) )
             {
                 // es wurde umgeschaltet
-                // hole nächste Stop Zeit
+                // hole nÃ¤chste Stop Zeit
                 savedStatisticStopTime = GenerateNextStopTime(currentMode, currentLine, currentStop, false);
             }
 
@@ -449,7 +449,7 @@ namespace LSTBusline
                 {
                     //Debug.WriteLine("early");
                     prefix = "-";
-                    suffix = "früh";
+                    suffix = "frÃ¼h";
                 }
                 else
                 {
@@ -457,13 +457,13 @@ namespace LSTBusline
                     {
                         //Debug.WriteLine("ontime");
                         prefix = "";
-                        suffix = "pünktlich";
+                        suffix = "pÃ¼nktlich";
                     }
                     else
                     {
                         //Debug.WriteLine("late");                        
                         prefix = "+";
-                        suffix = "verspätet";
+                        suffix = "verspÃ¤tet";
                     }
 
                 }
@@ -478,7 +478,7 @@ namespace LSTBusline
         private bool IsCurrentlineLineInformationOnly()
         {
             /*int stoptime = int.MinValue;
-            // Prüft ob alle Halts in der Linie identische Zeiten haben
+            // PrÃ¼ft ob alle Halts in der Linie identische Zeiten haben
 
             // alle stops
             for (int stop=0;stop <= Konfiguration.modes[currentMode].lines[currentLine].stops.Count() -1; stop++)
@@ -506,7 +506,7 @@ namespace LSTBusline
                 // auto forward...
                 int tempstop = 0;
                 //Debug.WriteLine("-----");
-                // den nächsten Stop vorauswählen - das ist der nächstmögliche entsprechend der aktuellen Uhrzeit
+                // den nÃ¤chsten Stop vorauswÃ¤hlen - das ist der nÃ¤chstmÃ¶gliche entsprechend der aktuellen Uhrzeit
                 lock (lockObject)
                 {
                     for (int i = 0; i <= Konfiguration.modes[currentMode].lines[currentLine].stops.Count() - 1; i++)
@@ -536,7 +536,7 @@ namespace LSTBusline
         }
 
         /// <summary>
-        /// wird regelmässig aufgerufen um das Display zu aktualisieren
+        /// wird regelmÃ¤ssig aufgerufen um das Display zu aktualisieren
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -547,14 +547,14 @@ namespace LSTBusline
             // Update Uhrzeit
             ledMatrixControl.SetItemText(idCurrentTime,GenerateCurrentTimeString());
 
-            // nur updaten wenn wir müssen
+            // nur updaten wenn wir mÃ¼ssen
             if (invalidated)
             {
                 // Update Line1
                 ledMatrixControl.SetItemText(idText_Line1, GenerateLine1());
                 // Update Line2
                 ledMatrixControl.SetItemText(idText_Line2, GenerateLine2());
-                // Update Nächster Halt
+                // Update NÃ¤chster Halt
                 ledMatrixControl.SetItemText(idNextStopTime, GenerateNextSelectedStopTime());
                 
                 // stop updating
@@ -577,9 +577,9 @@ namespace LSTBusline
             }
 
             if (even_or_uneven)
-                return "¥" + DateTime.Now.ToString("HH:mm");
-            else
-                return "¥" + DateTime.Now.ToString("HH¦mm");
+            if (Minute >= 60) Minute -= 60;
+
+            DateTime output = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, Minute, 0);
         }
 
         public DateTime GetNearestTimeInTheFutureForMinute(int MinuteInput,bool ignoreAbortWindow)
@@ -603,7 +603,7 @@ namespace LSTBusline
             if (IsCurrentlineLineInformationOnly())
                 return "";
             else
-                return "¦¦¦ :" + GenerateNextStopTime(currentMode, currentLine, currentStop, false).Minute.ToString("D2");
+                return "Â¦Â¦Â¦ :" + GenerateNextStopTime(currentMode, currentLine, currentStop, false).Minute.ToString("D2");
         }
 
         public DateTime GenerateNextStopTime(int mode, int line, int stop, bool ignoreAbortWindow)
@@ -638,9 +638,9 @@ namespace LSTBusline
         public String GenerateLogo()
         {
             if (Konfiguration.settings.style.logoinverted)
-                return "£";
+                return "Â£";
             else
-                return "¢";
+                return "Â¢";
         }
         public String GenerateLine1()
         {
@@ -680,7 +680,7 @@ namespace LSTBusline
         #region String helper
         static string PadCenter(string text, int newWidth)
         {
-            const char filler = '¡';
+            const char filler = 'Â¡';
             int length = text.Length;
             int charactersToPad = newWidth - length;
             if (charactersToPad < 0) return text;// throw new ArgumentException("New width must be greater than string length.", "newWidth");
@@ -865,7 +865,7 @@ namespace LSTBusline
 
         private void ResetConfiguration_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Soll die Konfiguration wirklich neu geladen und auf Lieferzustand zurückgesetzt werden? Damit werden auch alle Linien zurückgesetzt.", "Konfiguration auf Lieferzustand zurücksetzen", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Soll die Konfiguration wirklich neu geladen und auf Lieferzustand zurÃ¼ckgesetzt werden? Damit werden auch alle Linien zurÃ¼ckgesetzt.", "Konfiguration auf Lieferzustand zurÃ¼cksetzen", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 if (File.Exists("LST-Busline-Konfiguration.bak"))
