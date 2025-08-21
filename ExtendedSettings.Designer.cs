@@ -1,6 +1,6 @@
-﻿namespace LST_Busline
+﻿namespace LSTBusline
 {
-    partial class Form1
+    partial class ExtendedSettings
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExtendedSettings));
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -41,14 +41,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             // 
-            // Form1
+            // ExtendedSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "ExtendedSettings";
             this.Text = "Linien Einstellungen";
             this.ResumeLayout(false);
             this.PerformLayout();
